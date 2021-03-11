@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    width: 100%;
+}
+
+.header__icon {
+    object-fit: contain;
+    height: 100px;
+    margin-left: 80px;
+}
+
+.header__center {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    max-width: fit-content;
+    padding: 10px;
+    height: 30px;
+    border: 1px solid lightgray;
+    border-radius: 999px;
+}
+
+.header__center > input {
+    border: none;
+    padding: 10px;
+    outline-width: 0;
+    width: 250px;
+    color: black;
+}
+.header__center input::placeholder {
+    color: black;
+    font-weight: 700;
+}
+
+.header__center i {
+    background-color: #f08080;
+    border-radius: 999px;
+    padding: 8px;
+    color: white;
+}
+
+.header__right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 15vw;   
+}
+.header__right p {
+    font-weight: 700;
+}
+
+/* 배너 */
+.banner {
+    /* background: url(
+        https://media.cntraveler.com/photos/5e45984fa007f90008d5bb00/16:9/w_1600%2Cc_limit/Hoshinoya-SHINOYA%2520Guguan-Taiwan-2020-5.jpg
+        ) center center; */
+    background-image: url("https://a0.muscache.com/im/pictures/166791ff-bc82-4b88-ba3d-49be1d462dce.jpg?im_w=2560");
+    background-size: 95% 80%;
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 70vh;
+    position: relative;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.banner__info h3{
+    color: white;
+    font-size: 30px;
+    padding: 35px;
+    font-weight: 300;
+}

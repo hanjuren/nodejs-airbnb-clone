@@ -1,0 +1,36 @@
+.city__place {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.city__place section {
+    align-self: flex-start;
+    margin-top: 60px;
+    font-size: 30px;
+    font-weight: 700;
+    margin-left: 80px;
+}
+.city__info {
+    width: 90%;
+    padding: 20px;
+    margin-bottom: 100px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-auto-flow: row !important;
+}
+.city {
+    display: flex;
+    justify-content: flex-start;
+    height: 100px;
+    align-items: center;
+}
+.city img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+}
+.city p {
+    margin-left: 20px;
+    font-weight: 700;
+}
