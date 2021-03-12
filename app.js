@@ -10,6 +10,9 @@ dotenv.config();
 
 // 라우터들
 const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth');
+//시퀄라이즈 불러오기
+const { sequelize } = require('./models');
 
 const app = express();
 
@@ -19,6 +22,16 @@ nunjucks.configure('views', {
     express: app,
     watch: true,
 });
+
+//시퀄라이즈 설정
+sequelize.sync( { force: false })
+    .then(() => {
+        console.log('데이터 베이스 연결 성공.');
+    })
+    .catch((err) => {
+        console.log('데이터 베이스 연결 실패.');
+        console.error(err);
+    })
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -37,6 +50,7 @@ app.use(session({
 }));
 
 app.use('/', indexRouter);
+app.use('/auth', authRouter);
 
 app.use( (req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

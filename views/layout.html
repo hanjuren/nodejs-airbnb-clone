@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/layout.css">
     <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/join.css">
     <title>에어비앤비 클론코딩</title>
 </head>
 <body>
@@ -16,19 +17,34 @@
             <i class="fas fa-search"></i>
         </div>
         <div class="header__right">
-            <p>호스트 되기</p>  
+            <p>호스트 되기</p>
+            <div class="auth">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-user-circle"></i>
+            </div> 
         </div>
     </div>
-    <div class="banner">
-        <div class="banner__info">
-            <h3>호스트 여러분이 있기에 가능합니다.</h3>
-        </div>
+    
+    <div class="auth__info">
+        <a href="/join"><div class="auth__info__link" id="join__link">회원가입</div></a>
+        <div class="auth__info__link">로그인</div>
+        <div class="auth__info__link">호스트 되기</div>
     </div>
+
     {% block main %}
     {% endblock %}
 
     {% block script %}
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+     
+    <script>
+        window.onload = function () {
+            document.querySelector('.auth').addEventListener('click', function(){
+            document.querySelector('.auth__info').style.display = "block";
+            });
+        }
+        
+    </script>
     {%endblock%}
 </body>
 </html>

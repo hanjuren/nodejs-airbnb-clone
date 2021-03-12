@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+    <div class="join__container">
+        <div class="join__div">
+            <div class="join__title">
+                <h3>회원가입</h3>
+            </div>
+            <form action="/auth/join" method="post" id="join__form">
+                <div class="user__info">
+                    <input type="text" name="email" placeholder="이메일을 입력해주세요"/>
+                    <input type="password" name="password" placeholder="비밀번호를 입력해주세요" />
+                    <input type="text" name="name" placeholder="이름을 입력해주세요" />
+                    <input type="text" name="nickname" placeholder="사용하실 닉네임을 입력해주세요.">
+                </div>
+                    <div class="phone__number">
+                    <input type="text" name="firstNum" value="010" /> 
+                    <input type="text" name="middleNum" placeholder="- - - -" /> 
+                    <input type="text" name="lastNum" placeholder="- - - -" />
+                </div>
+                <button type="submit" id="join__btn">가입하기</button>
+            </form>
+            
+        </div>
+    </div>
+    
+{% endblock %}
+{% block script%}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>       
+    <script>
+        window.onload = () => {
+          if (new URL(location.href).searchParams.get('error')) {
+            alert('이미 존재하는 이메일입니다.');
+          }
+          if(response.status === 200 ){
+              alert('fdkjsalk');
+          }
+
+        };
+    </script>
+    
+{%endblock%}
