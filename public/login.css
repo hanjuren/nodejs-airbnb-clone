@@ -1,4 +1,4 @@
-.join__container {
+.login__container {
     width: 100%;
     height: 80vh;
     display: flex;
@@ -6,7 +6,7 @@
     align-items: center;
     position: relative;
 }
-.join__container::before {
+.login__container::before {
     content: "";
     background-image: url("https://a0.muscache.com/im/pictures/166791ff-bc82-4b88-ba3d-49be1d462dce.jpg?im_w=2560");
     background-size: cover;
@@ -18,7 +18,7 @@
     right: 0px;
     bottom: 0px;
 }
-.join__div {
+.login__div {
     width: 500px;
     height: 500px;
     border: 1px solid lightgray;
@@ -26,12 +26,12 @@
     background-color: white;
     z-index: 11;
 }
-.join__div form {
+.login__div form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.join__title {
+.login__title {
     width: 100%;
     height: 50px;
     display: flex;
@@ -39,47 +39,29 @@
     align-items: center;
     border-bottom: 1px solid lightgray;
 }
-.join__title h3 {
+.login__title h3 {
     padding: 5px;
 }
-.user__info {
+.login__info {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 50px;
 }
-.user__info input {
+.login__info input {
     width: 300px !important;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 15px;
+    border-radius: 20px;
     border: 1px solid lightgray;
     outline: none;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
+    font-size: 17px;
 }
-.phone__number{
-    display: flex;
-}
-.phone__number input {
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid lightgray;
-    outline: none;
-    text-align: center;
-}
-.phone__number input:first-child {
-    width: 40px;
-}
-.phone__number input:not(:first-child){
-    width: 90px;
-    margin-left: 17px;
-}
-.phone__number input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.login__info input::placeholder {
+    font-size: 15px;
 }
 
-#join__btn {
+#login__btn {
     border-radius: 10px;
     padding: 10px;
     margin-top: 10px;
@@ -92,6 +74,6 @@ input[type="number"]::-webkit-inner-spin-button {
     cursor: pointer;
     outline: none;
 }
-#join__btn:hover{
+#login__btn:hover{
     opacity: 0.7;
 }

@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="/layout.css">
     <link rel="stylesheet" href="/main.css">
     <link rel="stylesheet" href="/join.css">
+    <link rel="stylesheet" href="/login.css">
     <title>에어비앤비 클론코딩</title>
 </head>
 <body>
     <div class='header'>
-        <img class="header__icon" src="https://i.pinimg.com/564x/04/57/14/0457144332ce38550077355621165d24.jpg" alt="" />
+        <a href="/"><img class="header__icon" src="https://i.pinimg.com/564x/04/57/14/0457144332ce38550077355621165d24.jpg" alt="" /></a>
+        
         <div class="header__center">
             <input type="text" placeholder="검색 시작하기"/>
             <i class="fas fa-search"></i>
@@ -26,25 +28,42 @@
     </div>
     
     <div class="auth__info">
+        {% if user and user.id %}
+        <a href="/login"><div class="auth__info__link" id="join__link">내정보</div></a>
+        <a href="/login"><div class="auth__info__link">로그아웃</div></a>
+        {% else %}
         <a href="/join"><div class="auth__info__link" id="join__link">회원가입</div></a>
-        <div class="auth__info__link">로그인</div>
+        <a href="/login"><div class="auth__info__link">로그인</div></a>
         <div class="auth__info__link">호스트 되기</div>
+        {% endif %}
     </div>
 
     {% block main %}
     {% endblock %}
 
-    {% block script %}
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-     
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
+         
         window.onload = function () {
-            document.querySelector('.auth').addEventListener('click', function(){
-            document.querySelector('.auth__info').style.display = "block";
-            });
+            const openInfo = () =>{
+                const authInfo = document.querySelector('.auth');
+                document.querySelector('.auth__info').style.display = "block";
+                authInfo.removeEventListener('click', openInfo);
+                authInfo.addEventListener('click', closeInfo);
+            };
+            const closeInfo = () => {
+                const authInfo = document.querySelector('.auth');
+                document.querySelector('.auth__info').style.display = "none";
+                authInfo.removeEventListener('click', closeInfo);
+                authInfo.addEventListener('click', openInfo);
+            };
+            const authInfo = document.querySelector('.auth').addEventListener('click', openInfo);
         }
         
     </script>
+    {% block script %}
+   
     {%endblock%}
 </body>
 </html>

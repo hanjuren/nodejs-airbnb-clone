@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 const path = require('path');
+const passport = require('passport');
 
 dotenv.config();
 
@@ -13,9 +14,10 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 //시퀄라이즈 불러오기
 const { sequelize } = require('./models');
+const passportConfig = require('./passport');
 
 const app = express();
-
+passportConfig();
 app.set('port', process.env.PORT || 1210);
 app.set('view engine', 'html');
 nunjucks.configure('views', {
@@ -24,7 +26,7 @@ nunjucks.configure('views', {
 });
 
 //시퀄라이즈 설정
-sequelize.sync( { force: true })
+sequelize.sync( { force: false })
     .then(() => {
         console.log('데이터 베이스 연결 성공.');
     })
@@ -48,6 +50,9 @@ app.use(session({
         secure: false,
     },
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);

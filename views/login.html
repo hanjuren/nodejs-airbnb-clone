@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+    <div class="login__container">
+        <div class="login__div">
+            <div class="login__title">
+                <h3>로그인</h3>
+            </div>
+            <form id="login__form">
+                <div class="login__info">
+                    <input type="text" name="email" placeholder="이메일을 입력해주세요"/>
+                    <input type="password" name="password" placeholder="비밀번호를 입력해주세요" />
+                </div>  
+                <button type="submit" id="login__btn">로그인하기</button>
+            </form>
+            
+        </div>
+    </div>
+    
+{% endblock %}
+{% block script %}
+    <script>
+        document.getElementById('login__form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = e.target.email.value;
+            const password = e.target.password.value;
+            
+            if(email === "") {
+                return alert('이메일을 입력해주세요.');
+            }
+            if(password === "") {
+                return alert('비밀번호를 반드시 입력해주세요.');
+            }
+            
+            axios.post('/auth/login', {email, password})
+                .then((response) => {
+                    if(response.data.loginsuccess){
+                        alert(response.data.message);
+                        return window.location = "/";
+                    }
+                    alert(response.data.message);
+                    return location.reload();
+                })
+                .catch((error) => {
+                    console.error(error);
+                    return alert(error);
+                });
+        });
+    </script>
+{% endblock %}

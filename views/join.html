@@ -14,9 +14,9 @@
                     <input type="text" name="nickname" placeholder="사용하실 닉네임을 입력해주세요.">
                 </div>
                     <div class="phone__number">
-                    <input type="text" name="firstNum" value="010" /> 
-                    <input type="text" name="middleNum" placeholder="- - - -" /> 
-                    <input type="text" name="lastNum" placeholder="- - - -" />
+                    <input type="number" name="firstNum" value="010" /> 
+                    <input type="number" name="middleNum" placeholder="- - - -" maxlength="4" oninput="numberMaxLength(this);"/> 
+                    <input type="number" name="lastNum" placeholder="- - - -" maxlength="4" oninput="numberMaxLength(this);"/>
                 </div>
                 <button type="submit" id="join__btn">가입하기</button>
             </form>
@@ -26,13 +26,9 @@
     
 {% endblock %}
 {% block script%}
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>       
+     
     <script>
-        window.onload = () => {
-          if (new URL(location.href).searchParams.get('error')) {
-            alert('이미 존재하는 이메일입니다.');
-          }
-        };
+        
         document.getElementById('join__form').addEventListener('submit', (e) => {
             e.preventDefault();
             const joinData = {
@@ -57,7 +53,7 @@
                 .then((response) => {
                     if(response.data.joinsuccess){
                         alert(response.data.message);
-                        return window.location = "/";
+                        return window.location = "/login";
                     }
                     alert(response.data.message);
                     return location.reload();
@@ -75,6 +71,11 @@
             e.target.middleNum.value = '';
             e.target.lastNum.value = '';
         });
+        function numberMaxLength(e){
+            if(e.value.length > e.maxLength){
+                e.value = e.value.slice(0, e.maxLength);
+            }
+        }
     </script>
     
 {%endblock%}
