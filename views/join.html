@@ -6,7 +6,7 @@
             <div class="join__title">
                 <h3>회원가입</h3>
             </div>
-            <form action="/auth/join" method="post" id="join__form">
+            <form id="join__form">
                 <div class="user__info">
                     <input type="text" name="email" placeholder="이메일을 입력해주세요"/>
                     <input type="password" name="password" placeholder="비밀번호를 입력해주세요" />
@@ -32,11 +32,49 @@
           if (new URL(location.href).searchParams.get('error')) {
             alert('이미 존재하는 이메일입니다.');
           }
-          if(response.status === 200 ){
-              alert('fdkjsalk');
-          }
-
         };
+        document.getElementById('join__form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const joinData = {
+                email: e.target.email.value,
+                password: e.target.password.value,
+                name: e.target.name.value,
+                nickname: e.target.nickname.value,
+                phone: e.target.firstNum.value + e.target.middleNum.value + e.target.lastNum.value,
+            } 
+            console.log(joinData);  
+            if(joinData.email === "" ) {
+                return alert('이메일을 입력해주세요.');
+            }
+            if(joinData.password < 4) {
+                return alert('비밀번호는 4글자 이상입니다.');
+            }
+            if(joinData.name === "" || joinData.nickname === "" || joinData.phone === "" || joinData.phone.length > 11) {
+                return alert('잘못된 정보입니다.');
+            }
+            
+             axios.post('/auth/join', joinData)
+                .then((response) => {
+                    if(response.data.joinsuccess){
+                        alert(response.data.message);
+                        return window.location = "/";
+                    }
+                    alert(response.data.message);
+                    return location.reload();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+           
+            e.target.email.value = '';
+            e.target.password.value = '';
+            e.target.name.value = '';
+            e.target.nickname.value = '';
+            e.target.firstNum.value = '';
+            e.target.middleNum.value = '';
+            e.target.lastNum.value = '';
+        });
     </script>
     
 {%endblock%}

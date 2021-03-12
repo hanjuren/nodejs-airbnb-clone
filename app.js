@@ -24,7 +24,7 @@ nunjucks.configure('views', {
 });
 
 //시퀄라이즈 설정
-sequelize.sync( { force: false })
+sequelize.sync( { force: true })
     .then(() => {
         console.log('데이터 베이스 연결 성공.');
     })
