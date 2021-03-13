@@ -59,6 +59,10 @@
     font-weight: 700;
     margin-right: 20px;
 }
+.header__right a {
+    text-decoration: none;
+    color: black;
+}
 .auth {
     border: 1px solid lightgray;
     border-radius: 999px;

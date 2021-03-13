@@ -12,6 +12,7 @@ dotenv.config();
 // 라우터들
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const postRouter = require('./routes/post');
 //시퀄라이즈 불러오기
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
@@ -37,6 +38,7 @@ sequelize.sync( { force: false })
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/img', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded( { extended: false } ));
 
@@ -56,6 +58,7 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/post', postRouter);
 
 app.use( (req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

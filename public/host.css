@@ -1,0 +1,90 @@
+.host {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+}
+.host::before {
+    content: "";
+    background-image: url("https://i1.wp.com/kiramonthly.com/wp-content/uploads/2018/10/1810_6@airbnb-dublin-office-interiors-ireland-offices_dezeen_hero03.jpg?resize=1000%2C563");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+.host form,
+.host__info {
+    z-index: 100;
+}
+.host__info {
+    position: absolute;
+    top: 30px;
+    left: 100px;
+}
+.host__info h3 {
+    margin: 0;
+    font-size: 25px;
+}
+.host form {
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+    background-color: white;
+    border: 1px solid lightgray;
+    padding: 10px;
+    border-radius: 15px;
+    opacity: 0.9;
+}
+.host form input {
+    width: 650px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    outline: none;
+}
+.host form select {
+    width: 200px;
+    margin-bottom: 20px;
+    padding: .8em .5em;
+    background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+    border: none;   
+    border-bottom: 1px solid lightgray;
+    border-radius: 0px; /* iOS 둥근모서리 제거 */ 
+    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+    -moz-appearance: none; 
+    appearance: none;
+    outline: none;
+}
+
+.host form textarea {
+    resize: none;
+    height: 130px;
+    outline: none;
+}
+#img {
+    width: 200px;
+}
+#host__btn {
+    border-radius: 10px;
+    padding: 10px;
+    width: 320px;
+    border: 1px solid lightgray;
+    background-color: #ff7777;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    align-self: center;
+}
+#host__btn:hover {
+    opacity: 0.7;
+}
