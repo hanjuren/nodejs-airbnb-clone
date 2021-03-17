@@ -2,6 +2,8 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const Host = require('../models/host');
+const Image = require('../models/image');
 
 const router = express.Router();
 
@@ -22,15 +24,31 @@ const upload = multer({
             cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
         },
     }),
-    limits: { fileSize: 5 * 1024 * 1024 },
 });
 
-router.post('/host', upload.array('img'), (req, res) => {
-    console.log(req.body);
+router.post('/host', upload.array('img'), async (req, res, next) => {
+    const hostaddress = req.body.firstCity.concat(" ", req.body.middleCity," ", req.body.hostaddress);
+    const re = /\r\n/gi;
+    const hostinfo = req.body.hostinfo.replace(re, '<br>');
+    console.log(req.body.firstCity);
+    try{
+        const newHost = await Host.create({
+            title: req.body.title,
+            hostaddress,
+            city: req.body.firstCity,
+            person: req.body.person,
+            roominfo_room: req.body.room,
+            roominfo_bed: req.body.bed,
+            roominfo_cook: req.body.cook,
+            roominfo_bathroom: req.body.bathroom,
+            hostinfo,
+        });
+        console.log(newHost, "success");
+        res.redirect('/');
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
 });
-
-// router.post('/host', (req, res) => {
-//     console.log(req.body.url);
-// });
 
 module.exports = router;

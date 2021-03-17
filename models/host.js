@@ -4,7 +4,7 @@ module.exports = class Host extends Sequelize.Model{
     static init(sequelize) {
         return super.init( {
             title: {
-                type: Sequelize.STRING(40),
+                type: Sequelize.STRING(100),
                 allowNull: false,
             },
             hostaddress: {
@@ -19,12 +19,24 @@ module.exports = class Host extends Sequelize.Model{
                 type: Sequelize.STRING(10),
                 allowNull: false,
             },
-            roominfo: {
+            roominfo_room: {
+                type: Sequelize.STRING(100),
+                allowNull: false,
+            },
+            roominfo_bed: {
+                type: Sequelize.STRING(100),
+                allowNull: false,
+            },
+            roominfo_cook: {
+                type: Sequelize.STRING(100),
+                allowNull: false,
+            },
+            roominfo_bathroom: {
                 type: Sequelize.STRING(100),
                 allowNull: false,
             },
             hostinfo: {
-                type: Sequelize.STRING(300),
+                type: Sequelize.STRING(500),
                 allowNull: false,
             },
         }, {
@@ -40,6 +52,6 @@ module.exports = class Host extends Sequelize.Model{
     }
 
     static associate(db) {
-        db,Host.hasMany(db.Image);
+        db.Host.hasMany(db.Image);
     }
 };
