@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+    <div id={{city}}>
+        {% for host in hosts %}
+        <p>{{host.title}}</p>
+        {{host.hostaddress}}
+        {{host.city}}
+        {{host.person}}
+        {{host.roominfo_room}}
+        {{host.roominfo_bed}}
+        {{host.roominfo_cook}}
+        {{host.roominfo_bathroom}}
+        
+        
+        <pre>{{host.hostinfo}}</pre>
+        
+
+        {% for image in host.Images %}
+            <img src="../{{image.src}}" alt="" />
+        {% endfor %}
+        
+    {% endfor %}
+    </div>
+    <div class="page">
+    </div>
+
+    
+    
+{% endblock %}
+{% block script %}
+
+<script>
+    window.onload = function() {
+        const count = {{count}};
+        let section = parseInt(count/2);
+        console.log(section);
+        const pageDiv = document.querySelector('.page');
+        const cityId = document.getElementById('{{city}}');
+        if(count%2 !== 0 ){
+            section += 1;
+            for(let i=0; i<section; i++) {
+            let a = document.createElement('a');
+            a.innerHTML = i+1;
+            a.href = `/post/city?city=${cityId.id}&pagenum=${i+1}`;
+            pageDiv.append(a);   
+        }
+        }else {
+            for(let i=0; i<section; i++) {
+            let a = document.createElement('a');
+            a.innerHTML = i+1;
+            a.href = `/post/city?city=${cityId.id}&pagenum=${i+1}`;
+            pageDiv.append(a);   
+        }
+        }
+        
+    }
+    
+   
+</script>
+{% endblock %}

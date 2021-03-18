@@ -9,15 +9,15 @@
     <div class="city__place">
         <section>가까운 여행지 둘러보기</section>
         <div class="city__info">
-            <div class="city">
+            <div class="city" id="서울">
                 <img src="https://a0.muscache.com/im/pictures/71e23854-a3c7-491c-b715-6e86233a293f.jpg?im_q=medq&im_w=240" alt="" />
                 <p>서울 특별시</p>
             </div>
-            <div class="city">
+            <div class="city" id="인천">
                 <img src="https://a0.muscache.com/im/pictures/8b318783-723f-4584-9b9b-0eb2c8b6078e.jpg?im_q=medq&im_w=240" alt="" />
                 <p>인천 광역시</p>
             </div>
-            <div class="city">
+            <div class="city" id="대구">
                 <img src="https://a0.muscache.com/im/pictures/6b36a0f9-453f-4d11-974e-0cf164b4d18c.jpg?im_q=medq&im_w=240" alt="" />
                 <p>대구 광역시</p>
             </div>
@@ -45,4 +45,19 @@
     </div>
 
 
+{% endblock %}
+{% block script %}
+<script>
+
+    const city = document.querySelectorAll('.city').forEach(function(tag) {
+        tag.addEventListener('click', function() {
+            console.log(tag.id);
+            const city = encodeURI(tag.id)
+            console.log(city);
+            window.location = `/post/city?city=${city}`;
+            
+        });
+    });
+
+</script>
 {% endblock %}

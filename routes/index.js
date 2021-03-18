@@ -23,4 +23,5 @@ router.get('/host', (req, res, next) => {
     res.render('host', { title: "호스트" });
 });
 
+
 module.exports = router;
