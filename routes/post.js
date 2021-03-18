@@ -70,7 +70,7 @@ router.get('/city', async (req, res, next) => {
         let offset = 0;
 
         if(pageNum > 1){
-            offset = 2 * (pageNum - 1);
+            offset = 12 * (pageNum - 1);
         }
         
         const hosts = await Host.findAll({
@@ -85,7 +85,7 @@ router.get('/city', async (req, res, next) => {
             },
             order: [['id', 'DESC']],
             offset: offset,
-            limit: 2,
+            limit: 12,
 
         });
         const count = await Host.count({

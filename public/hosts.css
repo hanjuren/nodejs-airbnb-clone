@@ -1,0 +1,61 @@
+.hosts__Content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid lightgray;
+}
+.hosts__top {
+    width: 90%;
+    padding: 20px;
+    margin-left: 40px;
+}
+.hosts__top h3 {
+    font-size: 30px;
+    font-weight: 600;
+}
+.hosts__div {
+    width: 90%;
+    padding-top: 20px;
+    margin-bottom: 100px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-auto-flow: row !important;
+    place-items: center;
+    row-gap: 25px;
+}
+.hosts__info {
+    width: 300px;
+}
+.hosts__info img {
+    width: 300px;
+    height: 200px;
+    border-radius: 15px;
+}
+#paging {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 100px;
+}
+#paging a {
+    display: flex;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 999px;
+}
+
+#paging a:hover {
+    background-color: lightgray;
+}

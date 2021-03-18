@@ -1,61 +1,98 @@
 {% extends 'layout.html' %}
 
 {% block main %}
-    <div id={{city}}>
+
+<div class="hosts__Content">
+    <div class="hosts__top">
+        <p>총 {{count}}개의 숙소</p>
+        <h3>{{city}}의 숙소</h3>
+    </div>
+    <div class="hosts__div" id={{city}}>
         {% for host in hosts %}
-        <p>{{host.title}}</p>
-        {{host.hostaddress}}
-        {{host.city}}
-        {{host.person}}
-        {{host.roominfo_room}}
-        {{host.roominfo_bed}}
-        {{host.roominfo_cook}}
-        {{host.roominfo_bathroom}}
-        
-        
-        <pre>{{host.hostinfo}}</pre>
-        
-
-        {% for image in host.Images %}
-            <img src="../{{image.src}}" alt="" />
+        <div class="hosts__info">
+            <img src="../{{host.Images[0].src}}" alt="" />
+            {% set hostTitle = host.title.substring(0, 20) %}
+            <p>{{host.city}}</p>
+            <p>{{hostTitle}}...</p>
+        </div>   
         {% endfor %}
-        
-    {% endfor %}
     </div>
-    <div class="page">
-    </div>
+    <div id="paging"></div>
+</div>
 
-    
-    
+
+
 {% endblock %}
 {% block script %}
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
 <script>
-    window.onload = function() {
-        const count = {{count}};
-        let section = parseInt(count/2);
-        console.log(section);
-        const pageDiv = document.querySelector('.page');
-        const cityId = document.getElementById('{{city}}');
-        if(count%2 !== 0 ){
-            section += 1;
-            for(let i=0; i<section; i++) {
-            let a = document.createElement('a');
-            a.innerHTML = i+1;
-            a.href = `/post/city?city=${cityId.id}&pagenum=${i+1}`;
-            pageDiv.append(a);   
-        }
+   
+    var totalData = {{count}};    // 총 데이터 수
+    var dataPerPage = 12;    // 한 페이지에 나타낼 데이터 수
+    var pageCount = 5;        // 한 화면에 나타낼 페이지 수
+    
+    
+    function paging(totalData, dataPerPage, pageCount, currentPage){
+        
+        console.log("currentPage : " + currentPage);
+        
+        var totalPage = Math.ceil(totalData/dataPerPage);    // 총 페이지 수
+        var pageGroup = Math.ceil(currentPage/pageCount);    // 페이지 그룹
+        
+        console.log("pageGroup : " + pageGroup);
+        console.log("pageGroup : " + totalPage);
+        
+        var last = pageGroup * pageCount;
+           // 화면에 보여질 마지막 페이지 번호
+        if(last > totalPage)
+            last = totalPage;
+        if(last < pageCount){
+            var first = 1;
         }else {
-            for(let i=0; i<section; i++) {
-            let a = document.createElement('a');
-            a.innerHTML = i+1;
-            a.href = `/post/city?city=${cityId.id}&pagenum=${i+1}`;
-            pageDiv.append(a);   
+            var first = last - (pageCount-1);    // 화면에 보여질 첫번째 페이지 번호
         }
+        var next = last+1;
+        var prev = first-1;
+        
+        console.log("last : " + last);
+        console.log("first : " + first);
+        console.log("next : " + next);
+        console.log("prev : " + prev);
+ 
+        var $pingingView = $("#paging");
+        
+        var html = "";
+        
+        if(prev > 0)
+            html += "<a href=# id='prev'><</a> ";
+        
+        for(var i=first; i <= last; i++){
+            html += "<a href=/post/city?city={{city}}&pagenum="+ i + " id="+ i + ">" + i + " </a> ";
         }
         
+        if(last < totalPage)
+            html += "<a href=# id='next'>></a>";
+        
+        $("#paging").html(html);    // 페이지 목록 생성
+        $("#paging a").css("color", "black");                                           
+        $("#paging a").click(function(){
+            
+            var $item = $(this);
+            var $id = $item.attr("id");
+            var selectedPage = $item.text();
+            
+            if($id == "next")    selectedPage = next;
+            if($id == "prev")    selectedPage = prev;
+            
+            paging(totalData, dataPerPage, pageCount, selectedPage);
+        });
+                                           
     }
     
-   
+    $("document").ready(function(){        
+        paging(totalData, dataPerPage, pageCount, 1);
+    }); 
+    
+  
 </script>
 {% endblock %}
