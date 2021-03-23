@@ -20,7 +20,7 @@
 }
 .join__div {
     width: 500px;
-    height: 500px;
+    height: 550px;
     border: 1px solid lightgray;
     border-radius: 10px;
     background-color: white;
@@ -94,4 +94,48 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 #join__btn:hover{
     opacity: 0.7;
+}
+
+.social__join {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.social__join a {
+    margin-top: 10px;
+    text-decoration: none;
+    padding: 10px;
+    width: 180px;
+    color: black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.social__join a p {
+    margin-left: 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+#kakao {
+    background-color: #F7E600;
+}
+#kakao svg {
+    width: 15px;
+    height: 15px;
+}
+#facebook {
+    background-color:  #3b5998;
+}
+#facebook i {
+    color: white;
+}
+#naver {
+    background-color: #2DB400;
+}
+#naver img {
+    width: 20px;
+    height: 20px;
 }

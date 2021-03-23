@@ -2,10 +2,12 @@ const express = require('express');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+
 
 const router = express.Router();
 
-router.post('/join', async (req, res, next) => {
+router.post('/join', isNotLoggedIn, async (req, res, next) => {
     try {
         const {
             email,
@@ -36,7 +38,7 @@ router.post('/join', async (req, res, next) => {
     }
 });
 
-router.post('/login', async(req, res, next) => {
+router.post('/login', isNotLoggedIn, async(req, res, next) => {
     passport.authenticate('local', (authError, user, info) => {
         if (authError) { // 서버 에러일경우
             console.error(authError);
@@ -56,4 +58,48 @@ router.post('/login', async(req, res, next) => {
     })(req, res, next); // 미들웨어 내의 미들웨어에는 (req, res, next)를 넣어준다.
 });
 
-module.exports = router;
+//카카오
+// 카카오 로그인
+router.get('/kakao', isNotLoggedIn, passport.authenticate('kakao'));
+
+router.get('/kakao/callback', passport.authenticate('kakao', {
+    failureRedirect: '/join',
+}), (req, res) => {
+    res.redirect('/')
+});
+
+// 페이스북 로그인
+router.get('/facebook', isNotLoggedIn, passport.authenticate('facebook', {scope: ['public_profile', 'email']} ));
+
+router.get('/facebook/callback', passport.authenticate('facebook', {
+    failureRedirect: '/join',
+}), (req, res) => {
+    res.redirect('/')
+});
+
+// 네이버 로그인
+router.get('/naver', isNotLoggedIn, passport.authenticate('naver'));
+
+router.get('/naver/callback', passport.authenticate('naver', {
+    failureRedirect: '/join',
+}), (req, res) => {
+    res.redirect('/')
+});
+
+router.put('/hostapply',isLoggedIn, async (req, res, next) => {
+    console.log(req.user);
+    try{
+        const exUser = await User.update({
+            hostAvailability: true,   
+        }, {
+            where: {id: req.user.id},
+        });
+        console.log(exUser);
+        res.json({ applysuccess: true, message: "호스트 신청이 완료되었습니디. 호스팅을 통해 새로운 삶을 시작해보세요." });
+    }catch(error) {
+        console.error(error);
+        res.json({applysuccess: false, message: "호스트 신청이 완료되지 못했습니다. 잠시후 다시 신청해주세요."});
+    }
+});
+
+module.exports = router;    

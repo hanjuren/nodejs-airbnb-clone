@@ -10,10 +10,12 @@
     <div class="hosts__div" id={{city}}>
         {% for host in hosts %}
         <div class="hosts__info">
-            <img src="../{{host.Images[0].src}}" alt="" />
-            {% set hostTitle = host.title.substring(0, 20) %}
-            <p>{{host.city}}</p>
-            <p>{{hostTitle}}...</p>
+            <a href="/post/{{host.id}}">
+                <img src="../{{host.Images[0].src}}" alt="" />
+                {% set hostTitle = host.title.substring(0, 20) %}
+                <p>{{host.city}}</p>
+                <p>{{hostTitle}}...</p>
+            </a>
         </div>   
         {% endfor %}
     </div>
@@ -27,46 +29,36 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
 <script>
    
-    var totalData = {{count}};    // 총 데이터 수
-    var dataPerPage = 12;    // 한 페이지에 나타낼 데이터 수
-    var pageCount = 5;        // 한 화면에 나타낼 페이지 수
+    const totalData = {{count}};    // 총 데이터 수
+    const dataPerPage = 12;    // 한 페이지에 나타낼 데이터 수
+    const pageCount = 5;        // 한 화면에 나타낼 페이지 수
     
     
     function paging(totalData, dataPerPage, pageCount, currentPage){
+        const totalPage = Math.ceil(totalData/dataPerPage);    // 총 페이지 수
+        const pageGroup = Math.ceil(currentPage/pageCount);    // 페이지 그룹
         
-        console.log("currentPage : " + currentPage);
-        
-        var totalPage = Math.ceil(totalData/dataPerPage);    // 총 페이지 수
-        var pageGroup = Math.ceil(currentPage/pageCount);    // 페이지 그룹
-        
-        console.log("pageGroup : " + pageGroup);
-        console.log("pageGroup : " + totalPage);
-        
-        var last = pageGroup * pageCount;
+        let last = pageGroup * pageCount;
+        let first;
            // 화면에 보여질 마지막 페이지 번호
         if(last > totalPage)
             last = totalPage;
         if(last < pageCount){
-            var first = 1;
+            first = 1;
         }else {
-            var first = last - (pageCount-1);    // 화면에 보여질 첫번째 페이지 번호
+            first = last - (pageCount-1);    // 화면에 보여질 첫번째 페이지 번호
         }
-        var next = last+1;
-        var prev = first-1;
-        
-        console.log("last : " + last);
-        console.log("first : " + first);
-        console.log("next : " + next);
-        console.log("prev : " + prev);
+        let next = last+1;
+        let prev = first-1;
  
-        var $pingingView = $("#paging");
+        let $pingingView = $("#paging");
         
-        var html = "";
+        let html = "";
         
         if(prev > 0)
             html += "<a href=# id='prev'><</a> ";
         
-        for(var i=first; i <= last; i++){
+        for(let i=first; i <= last; i++){
             html += "<a href=/post/city?city={{city}}&pagenum="+ i + " id="+ i + ">" + i + " </a> ";
         }
         

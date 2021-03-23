@@ -4,7 +4,9 @@ const path = require('path');
 const fs = require('fs');
 const Host = require('../models/host');
 const Image = require('../models/image');
+const User = require('../models/user');
 const sequelize = require("sequelize");
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const Op = sequelize.Op;
 
 const router = express.Router();
@@ -28,7 +30,7 @@ const upload = multer({
     }),
 });
 
-router.post('/host', upload.array('img'), async (req, res, next) => {
+router.post('/host', isLoggedIn, upload.array('img'), async (req, res, next) => {
     const hostaddress = req.body.firstCity.concat(" ", req.body.middleCity," ", req.body.hostaddress);
     //const re = /\r\n/g;
     //const hostinfo = req.body.hostinfo.replace(re, `<br>`);
@@ -45,6 +47,7 @@ router.post('/host', upload.array('img'), async (req, res, next) => {
             roominfo_cook: req.body.cook,
             roominfo_bathroom: req.body.bathroom,
             hostinfo: req.body.hostinfo,
+            UserId: req.user.id,
         });
         for(i=0; i<req.files.length; i++){
             let newImage = await Image.create({
@@ -64,7 +67,7 @@ router.post('/host', upload.array('img'), async (req, res, next) => {
 
 
 router.get('/city', async (req, res, next) => {
-    console.log(req.query.city); 
+    console.log(req.query.city);
     try {
         let pageNum = req.query.pagenum; // 요청 페이지 넘버
         let offset = 0;
@@ -100,6 +103,28 @@ router.get('/city', async (req, res, next) => {
         //res.json({ success: true, hosts });
         res.render('hosts', {hosts, count, city});
     } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+router.get('/:postid', async (req, res, next) => {
+    try{
+        const host = await Host.findOne({
+            where: {id: req.params.postid},
+            include: [
+                {
+                    model: User,
+                    attributes: ['name', 'nickname', 'id'],
+                }, {
+                    model: Image,
+                    limit: 5,
+                },  
+            ],
+        });
+        res.render('hostinfo', {host});
+        console.log(host);
+    }catch (error) {
         console.error(error);
         next(error);
     }

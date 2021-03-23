@@ -27,6 +27,14 @@
 }
 .hosts__info {
     width: 300px;
+    cursor: pointer;
+}
+.hosts__info:hover {
+    opacity: 0.9;
+}
+.hosts__info a {
+    text-decoration: none;
+    color: black;
 }
 .hosts__info img {
     width: 300px;
@@ -58,4 +66,118 @@
 
 #paging a:hover {
     background-color: lightgray;
+}
+/* 호스트 신청페이지 */
+
+.host__apply {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 100px;
+}
+.apply__title {
+    height: 500px;
+    background-image: url("https://media.cntraveler.com/photos/5a8d7f048ea5f04e2cf774bf/master/w_1600%2Cc_limit/St-Regis_Presidential-Suite---2nd-bedroom.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    padding-left: 100px;
+}
+.apply__title p {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    padding-top: 20px;
+    margin-left: 5px;
+}
+#title__info1 {
+    width: 700px;
+}
+#title__info1 h3{
+    font-size: 50px;
+    color: white;
+}
+#title__info2 {
+    width: 600px;
+}
+
+.apply__middle {
+    display: flex;
+    width: 100%;
+    height: 300px;
+    padding-top: 100px;
+}
+
+.middle__info1 {
+    width: 360px;
+    padding-left: 100px;
+}
+.middle__info1 h2 {
+    font-size: 40px;
+}
+
+.middle__info2 {
+    width: 330px;
+    margin-left: 200px;
+}
+.middle__info2 p {
+    margin-top: 30px;
+}
+
+.middle__info3 {
+    width: 320px;
+    margin-left: 100px;
+}
+.middle__info3 p {
+    margin-top: 30px;
+
+}
+.apply__bottom {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 100px;
+}
+.bottom__info {
+    display: flex;
+    margin-top: 50px;
+}
+.bottom__info p {
+    margin-top: 30px;
+}
+.bottom__title {
+    padding-left: 100px;
+}
+.bottom__title h2 {
+    font-size: 40px;
+}
+#info1 {
+    width: 400px;
+    padding-left: 100px;
+}
+#info2 {
+    margin-left: 80px;
+    width: 400px;
+}
+#info3 {
+    width: 420px;
+    margin-left: 50px;
+}
+
+#apply__btn {
+    width: 150px;
+    padding: 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ff7777;
+    align-self: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+#apply__btn:hover {
+    color: black;
+    background-color: #ff7771;
 }

@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+    <div class="host__apply">
+        <div class="apply__title">
+            <p>호스팅 시작하기</p>
+            <div id="title__info1">
+                <h3>공간을 나누고 새로운 세상을 얻다</h3>
+            </div>
+            <div id="title__info2">
+                <p>에어비앤비 호스트가 되면 남는 공간을 활용해 부수입을 올리고 진짜 하고 싶은 일에 매진할 수 있습니다.</p>
+            </div>
+        </div>
+        <div class="apply__middle">
+            <div class="middle__info1">
+                <h2>내 인생의 새로운 시작, 호스트가 되면 가능합니다</h2>
+            </div>
+            <div class="middle__info2">
+                <h2>새로운 가능성이 열립니다</h2>
+                <p>호스팅을 통해 내가 원하는 시간에 유연하게 일하면서 부수입을 올리고 전 세계 사람들을 만나세요.</p>
+            </div>
+            <div class="middle__info3">
+                <h2>안심할 수 있는 호스팅</h2>
+                <p>연중무휴 지원, 호스트 커뮤니티, 호스트를 위한 맞춤 도구와 데이터 분석, 교육 등<br> 에어비앤비는 다방면으로 호스트의 성공을 지원합니다.</p>
+            </div>
+        </div>
+        <div class="apply__bottom">
+            <div class="bottom__title">
+                <h2>에어비앤비의 호스트 지원</h2>
+            </div>
+            <div class="bottom__info">
+                <div id="info1">
+                    <h2>호스트를 보호하는 다양한 프로그램</h2>
+                    <p>혹시라도 사고가 발생하는 경우에 대비하여,<br> 대부분의 에어비앤비 예약에는 미화 최대 1백만 달러의<br> 재산 피해 보호 및 책임배상보험이 포함됩니다.</p>
+                </div>
+                <div id="info2">
+                    <h2>코로나19 방역을 위한 안전 수칙</h2>
+                    <p>커뮤니티 구성원의 건강을 지키기 위해<br> 전문가들과 협력하여 모든 참가자를 위한 방역 수칙과<br> 호스트를 위한 청소 절차를 마련하고 있습니다.</p>
+                </div>
+                <div id="info3">
+                    <h2>높은 게스트 기준</h2>
+                    <p>호스트는 예약 확정 전에<br> 게스트 신원과 게스트에 대한 후기를 확인할 수 있으므로<br> 안심하고 예약을 받을 수 있습니다.<br> 에어비앤비는 새로운 게스트 기준 정책을 통해 게스트가 지켜야 할 사항을 명확히 규정하고 있습니다.</p>
+                </div>
+            </div>
+        </div>
+        <button id="apply__btn">시작하기</button>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+    const hostapply = () => {
+        console.log({{user.id}});
+
+        axios.put('/auth/hostapply')
+            .then((response) => {
+                if(response.data.applysuccess) {
+                    alert(response.data.message);
+                    return window.location = "/host";
+                }
+                alert(response.data.message);
+                return location.reload();
+            })
+            .catch((error) => {
+                console.error(error);
+                return alert("서버에 오류가 있습니다 불편을 드려 죄송합니다.");
+            });
+    };
+    document.getElementById('apply__btn').addEventListener('click', hostapply);
+</script>
+{% endblock%}

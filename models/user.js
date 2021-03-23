@@ -10,7 +10,7 @@ module.exports = class User extends Sequelize.Model{
             },
             password: {
                 type: Sequelize.STRING(200),
-                allowNull: false,
+                allowNull: true,
             },
             name: {
                 type: Sequelize.STRING(30),
@@ -18,12 +18,25 @@ module.exports = class User extends Sequelize.Model{
             },
             nickname: {
                 type: Sequelize.STRING(30),
-                allowNull: false,
+                allowNull: true,
             },
             phone: {
                 type: Sequelize.STRING(11),
-                allowNull: false,
+                allowNull: true,
             },
+            provider: {
+                type: Sequelize.STRING(10),
+                allowNull: false,
+                defaultValue: 'local',
+            },
+            snsId: {
+                type: Sequelize.STRING(30),
+                allowNull: true,
+            },
+            hostAvailability: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false,
+            }
         }, {
             sequelize,
             timestamps: true,
@@ -37,6 +50,6 @@ module.exports = class User extends Sequelize.Model{
     }
 
     static associate(db) {
-        
+        db.User.hasMany(db.Host);
     }
 };
