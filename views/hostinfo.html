@@ -1,66 +1,75 @@
 {% extends 'layout.html' %}
 
 {% block main %}
-    <div class="host__container">
-        <div class="hostinfo__container">
+<div class="host__container">
+    <div class="hostinfo__container">
 
-            <div class="hostinfo__title">
-                <div id="hostinfo__title">
-                    <h2>{{host.title}}</h2>
+        <div class="hostinfo__title">
+            <div id="hostinfo__title">
+                <h2>{{host.title}}</h2>
+            </div>
+            <div id="hostinfo__middletitle">
+                <div id="middletitle__city">
+                    <p>{{host.city}}</p>
                 </div>
-                <div id="hostinfo__middletitle">
-                    <div id="middletitle__city">
-                        <p>{{host.city}}</p>
-                    </div>
-                    <div id="middletitle__save">
-                        <p>저장</p>
-                    </div>
+                <div id="middletitle__save">
+                    <p>저장</p>
                 </div>
             </div>
+        </div>
 
-            <!-- Image -->
-            <div class="hostinfo__Image">
-                {% for image in host.Images %}
-                <div class="image" id="image{{loop.index}}">
-                    <img src="../{{image.src}}" alt="" />
-                </div>
-                
-                {% endfor %}
-                {% if host.Images.length < 5 %}
-                <div class="image"></div>
-                {% endif %}
+        <!-- Image -->
+        <div class="hostinfo__Image">
+            {% for image in host.Images %}
+            <div class="image" id="image{{loop.index}}">
+                <img src="../{{image.src}}" alt="" />
             </div>
 
-            <!-- info -->
-            <div class="hosting__info">
-                <div class="hosting__name">
-                    <h2>{{host.User.nickname}}님의 호스팅 정보</h2>
-                    <div class="simple__info">
-                        <p>인원 : {{host.person}} </p>
-                        <p>침실 : {{host.person}} </p>
-                        <p>욕실 : {{host.person}} </p>
-                    </div>
-                </div>
+            {% endfor %}
+            {% if host.Images.length < 5 %} <div class="image">
+        </div>
+        {% endif %}
+    </div>
 
-                <div class="hostig__roominfo">
-                    {{host.hostinfo}}  
-                </div>
-
-                <div class="hosting__bed">
-                    <h2>침구/침대 유형</h2>
-                    
-                    <div id="bedicon">
-                        <h5>icon 자리</h5>
-                        <p>{{host.roominfo_bed}}</p>
-                    </div>
-                </div>
+    <!-- info -->
+    <div class="hosting__info">
+        <div class="hosting__name">
+            <h2>{{host.User.nickname}}님의 호스팅 정보</h2>
+            <div class="simple__info">
+                <p>인원 : {{host.person}} </p>
+                <p>침실 : {{host.roominfo_room}} </p>
+                <p>욕실 : {{host.roominfo_bathroom}} </p>
             </div>
+        </div>
+
+        <div class="hostig__roominfo">
+            {{host.hostinfo}}
+        </div>
+
+        <div class="hosting__bed">
+            <h2>침구/침대 유형</h2>
+
+            <div id="bedicon">
+                <i class="fas fa-bed"></i>
+                <p>{{host.roominfo_bed}} 사이즈</p>
+            </div>
+        </div>
+
+        <div class="datepicker">
 
         </div>
+
+
     </div>
-    
+
+</div>
+</div>
+
 {% endblock %}
 {% block script %}
 <script>
+
+
+
 </script>
 {% endblock %}

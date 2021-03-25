@@ -150,6 +150,7 @@
     width: 100%;
     padding-bottom: 30px;
     border-bottom: 1px solid lightgray;
+    margin-top: 15px;
 }
 .simple__info p:not(:first-child){
     margin-left: 10px;
@@ -161,18 +162,25 @@
     border-bottom: 1px solid lightgray;
 }
 .hosting__bed {
-    padding-bottom: 100px;
+    padding-bottom: 50px;
+}
+.hosting__bed h2 {
+    margin-top: 15px;
 }
 #bedicon {
-    width: 200px;
-    height: 170px;
+    width: 180px;
+    height: 130px;
     border: 1px solid lightgray;
     border-radius: 5px;
     margin-top: 20px;
 }
 #bedicon p {
     margin-top: 10px;
+    margin-left: 15px;
+    font-size: 18px;
 }
-#bedicon h5 {
+#bedicon i {
     margin-top: 10px;
+    margin-left: 15px;
+    font-size: 20px;
 }
