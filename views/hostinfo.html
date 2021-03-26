@@ -55,10 +55,29 @@
             </div>
         </div>
 
-        <div class="datepicker">
+        <div class="date__div">
+            <h2>체크인 날짜를 선택해주세요</h2>
+            <p>여행 날짜를 선택하시면 예약이 가능한지 확인 하실 수 있습니다.</p>
+            <div class="datepicker">
+                <h2>여행 일정을 선택해주세요</h2>
+                <div id="datepicker">
+                    <div id="checkin">
+                        <p>체크인</p>
+                        <input type="text" placeholder="날짜선택" id="checkinfilter" name="checkinfilter" value="" />
+                    </div>
+                    <div id="checkout">
+                        <p>체크아웃</p>
+                        <input type="text" placeholder="날짜선택" id="checkoutfilter" name="checkoutfilter" value="" />
+                    </div>
+                </div>
 
+                <button id="order__btn">예약 가능 여부 보기</button>
+            </div>
         </div>
 
+        <div class="review__div">
+            <h2>후기</h2>
+        </div>
 
     </div>
 
@@ -68,7 +87,26 @@
 {% endblock %}
 {% block script %}
 <script>
+    $(function () {
 
+        $('input[name="checkinfilter"], input[name="checkoutfilter"]').daterangepicker({
+            autoUpdateInput: false
+        });
+
+        $('input[name="checkinfilter"], input[name="checkoutfilter"]').on('apply.daterangepicker', function (ev, picker) {
+            $('input[name="checkinfilter"]').val(picker.startDate.format('YYYY/MM/DD'));
+            $('input[name="checkoutfilter"]').val(picker.endDate.format('YYYY/MM/DD'));
+            //console.log(picker.startDate.format('YYYY/MM/DD'));
+        });
+
+    });
+
+    document.querySelector('#order__btn').addEventListener('click', function () {
+        const checkin = document.querySelector('#checkinfilter').value;
+        const checkout = document.querySelector('#checkoutfilter').value;
+        console.log(checkin);
+        console.log(checkout);
+    });
 
 
 </script>

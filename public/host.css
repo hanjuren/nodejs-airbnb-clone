@@ -163,6 +163,7 @@
 }
 .hosting__bed {
     padding-bottom: 50px;
+    border-bottom: 1px solid lightgray;
 }
 .hosting__bed h2 {
     margin-top: 15px;
@@ -183,4 +184,85 @@
     margin-top: 10px;
     margin-left: 15px;
     font-size: 20px;
+}
+
+.date__div {
+    padding-bottom: 50px;
+    border-bottom: 1px solid lightgray;
+}
+.date__div h2{
+    margin-top: 15px;
+}
+.date__div p{
+    margin-top: 10px;
+}
+
+.datepicker {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    width: 300px;
+    height: 200px;
+    margin-top: 20px;
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+    align-items: center;
+}
+.datepicker h2 {
+    font-size: 15px;
+    align-self: flex-start;
+    margin-left: 15px;
+}
+#datepicker {
+    width: 250px;
+    height: 80px;
+    border: 1px solid lightgray;
+    display: flex;
+    border-radius: 10px;
+    margin-top: 15px; 
+}
+#datepicker p {
+    font-size: 10px;
+}
+#checkin {
+    border-right: 1px solid lightgray;
+}
+#checkin,
+#checkout {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+#checkin input,
+#checkout input {
+    width: 100px;
+    height: 30px;
+    outline: none;
+    align-self: center;  
+    margin-top: 10px; 
+    border: none;
+}
+#checkin p,
+#checkout p {
+    margin-left: 10px;
+}
+#order__btn{
+    margin-top: 20px;
+    background-color: #ff7777;
+    border: none;
+    border-radius: 10px;
+    width: 200px;
+    padding: 12px;
+    color: white;
+    font-weight: 900;
+    font-size: 15px;
+    outline: none;
+    cursor: pointer;
+}
+
+.review__div {
+    height: 300px;
+}
+.review__div h2{
+    margin-top: 15px;
 }

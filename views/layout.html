@@ -72,7 +72,7 @@
         {% endif %}
     </div>
 
-    <input type="text" name="datefilter" value="" />
+
 
     {% block main %}
     {% endblock %}
@@ -98,18 +98,7 @@
         }
 
 
-        $(function () {
 
-            $('input[name="datefilter"]').daterangepicker({
-                autoUpdateInput: false
-            });
-
-            $('input[name="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
-                $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
-                console.log(picker.startDate.format('YYYY/MM/DD'));
-            });
-
-        });
     </script>
     {% block script %}
 
