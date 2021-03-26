@@ -20,7 +20,7 @@ api
 - [x] "/auth/join" => 회원가입 처리
 - [x] "/auth/login" => 로컬 로그인 처리
 - [x] "/post/host" => 숙소 업로드 처리
-- [ ] "/"
+- [ ] "/post/reservation/:postid" => 숙소 예약확인 및 예약 하기
 
 ## PUT
 - [x] "/auth/hostapply" => 호스트 신청 처리

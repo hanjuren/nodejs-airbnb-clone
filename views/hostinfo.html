@@ -90,7 +90,8 @@
     $(function () {
 
         $('input[name="checkinfilter"], input[name="checkoutfilter"]').daterangepicker({
-            autoUpdateInput: false
+            autoUpdateInput: false,
+            minDate: new Date()
         });
 
         $('input[name="checkinfilter"], input[name="checkoutfilter"]').on('apply.daterangepicker', function (ev, picker) {
@@ -104,8 +105,23 @@
     document.querySelector('#order__btn').addEventListener('click', function () {
         const checkin = document.querySelector('#checkinfilter').value;
         const checkout = document.querySelector('#checkoutfilter').value;
-        console.log(checkin);
-        console.log(checkout);
+
+        axios.post(`/post/reservation/{{host.id}}`, { checkin, checkout })
+            .then((response) => {
+                if (response.data.success) {
+                    const result = confirm('예약이 가능합니다. 예약 하시겠습니까?');
+                    if (result) {
+                        return window.location = "/login";
+                    }
+                    return location.reload();
+                }
+                alert('선택하신 날짜에 이미 예약이 있습니다.');
+                return location.reload();
+            })
+            .catch((error) => {
+                console.error(error);
+                return alert(error);
+            });
     });
 
 

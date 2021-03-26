@@ -5,9 +5,11 @@ const fs = require('fs');
 const Host = require('../models/host');
 const Image = require('../models/image');
 const User = require('../models/user');
+const Reservation = require('../models/reservation');
 const sequelize = require("sequelize");
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const Op = sequelize.Op;
+const dateFormat = require('dateformat');
 
 const router = express.Router();
 
@@ -102,6 +104,42 @@ router.get('/city', async (req, res, next) => {
         const city = req.query.city;
         //res.json({ success: true, hosts });
         res.render('hosts', {hosts, count, city});
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+router.post('/reservation/:postId', async (req, res, next) => {
+    console.log(req.body); 
+    const checkInDate = dateFormat(new Date(req.body.checkin), "yyyy-mm-dd");
+    const checkOutDate = dateFormat(new Date(req.body.checkout), "yyyy-mm-dd");
+    
+    try {
+        const exReservation = await Reservation.findOne({
+            where: { 
+                id: req.params.postId,
+                [Op.and]: [ // and 연산자
+                { 
+                    [Op.or]: [ 
+                        {checkIn: {[Op.lte]: checkInDate}}, // Reservation.chechIn >= checkIndate 
+                        {checkIn: {[Op.lt]: checkOutDate}}, // Reservation.chechIn > checkOutdate 
+                    ]
+                }, 
+                { 
+                    [Op.or]: [ 
+                        {checkout: {[Op.gt]: checkInDate}}, // Reservation.checkout < checkInDate
+                        {checkout: {[Op.gte]: checkOutDate}}, // Reservation.checkout <= checkOutDate
+                    ] 
+                }, 
+            ],
+            
+        }
+        });
+        if(exReservation) {
+            return res.json({ success: false });
+        }
+        return res.json({success: true});
     } catch (error) {
         console.error(error);
         next(error);
