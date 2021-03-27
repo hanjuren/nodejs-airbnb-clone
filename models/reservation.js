@@ -24,6 +24,7 @@ module.exports = class Reservation extends Sequelize.Model{
     }
 
     static associate(db) {
-        
+        db.Reservation.belongsTo(db.User);
+        db.Reservation.belongsTo(db.Host);
     }
 };

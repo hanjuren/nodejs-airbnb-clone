@@ -102,16 +102,19 @@
 
     });
 
+
     document.querySelector('#order__btn').addEventListener('click', function () {
         const checkin = document.querySelector('#checkinfilter').value;
         const checkout = document.querySelector('#checkoutfilter').value;
 
-        axios.post(`/post/reservation/{{host.id}}`, { checkin, checkout })
+        axios.post(`/post/reservationChecking/{{host.id}}`, { checkin, checkout })
             .then((response) => {
                 if (response.data.success) {
                     const result = confirm('예약이 가능합니다. 예약 하시겠습니까?');
                     if (result) {
-                        return window.location = "/login";
+                        const checkin = response.data.checkin;
+                        const checkout = response.data.checkout;
+                        return window.location = `/reservation?checkin=${checkin}&checkout=${checkout}`;
                     }
                     return location.reload();
                 }

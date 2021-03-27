@@ -32,6 +32,7 @@ const upload = multer({
     }),
 });
 
+// 게시글 업로드
 router.post('/host', isLoggedIn, upload.array('img'), async (req, res, next) => {
     const hostaddress = req.body.firstCity.concat(" ", req.body.middleCity," ", req.body.hostaddress);
     //const re = /\r\n/g;
@@ -67,7 +68,7 @@ router.post('/host', isLoggedIn, upload.array('img'), async (req, res, next) => 
 });
 
 
-
+// 도시별 게시물 가져오기
 router.get('/city', async (req, res, next) => {
     console.log(req.query.city);
     try {
@@ -110,15 +111,15 @@ router.get('/city', async (req, res, next) => {
     }
 });
 
-router.post('/reservation/:postId', async (req, res, next) => {
-    console.log(req.body); 
+//예약 확인
+router.post('/reservationChecking/:hostId', async (req, res, next) => {
     const checkInDate = dateFormat(new Date(req.body.checkin), "yyyy-mm-dd");
     const checkOutDate = dateFormat(new Date(req.body.checkout), "yyyy-mm-dd");
     
     try {
         const exReservation = await Reservation.findOne({
             where: { 
-                id: req.params.postId,
+                HostId: req.params.hostId,
                 [Op.and]: [ // and 연산자
                 { 
                     [Op.or]: [ 
@@ -137,15 +138,20 @@ router.post('/reservation/:postId', async (req, res, next) => {
         }
         });
         if(exReservation) {
-            return res.json({ success: false });
+            return res.json({ success: false});
         }
-        return res.json({success: true});
+        return res.json({success: true, checkin: checkInDate, checkout: checkOutDate});
     } catch (error) {
         console.error(error);
         next(error);
     }
 });
 
+// 예약 하기
+router.post('/reservation/:hostId', (req, res) => {
+    console.log(req);
+});
+// 게시글 상세 가져오기
 router.get('/:postid', async (req, res, next) => {
     try{
         const host = await Host.findOne({

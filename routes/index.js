@@ -28,6 +28,10 @@ router.get('/host/apply', isLoggedIn, (req, res, next) => {
     res.render('hostapply', { title: "호스트" });
 });
 
+router.get('/reservation', isLoggedIn, (req, res, next) => {
+    res.render('reservation');
+});
+
 
 
 

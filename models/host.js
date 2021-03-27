@@ -54,5 +54,6 @@ module.exports = class Host extends Sequelize.Model{
     static associate(db) {
         db.Host.hasMany(db.Image);
         db.Host.belongsTo(db.User);
+        db.Host.hasMany(db.Reservation);
     }
 };
