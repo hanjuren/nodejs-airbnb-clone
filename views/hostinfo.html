@@ -114,7 +114,7 @@
                     if (result) {
                         const checkin = response.data.checkin;
                         const checkout = response.data.checkout;
-                        return window.location = `/reservation?checkin=${checkin}&checkout=${checkout}`;
+                        return window.location = `/post/reservation/{{host.id}}?checkin=${checkin}&checkout=${checkout}`;
                     }
                     return location.reload();
                 }

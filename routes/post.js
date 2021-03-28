@@ -110,6 +110,22 @@ router.get('/city', async (req, res, next) => {
         next(error);
     }
 });
+// 예약 페이지
+router.get('/reservation/:hostId', isLoggedIn, async (req, res, next) => {
+    try {
+        const host = await Host.findOne({
+            where: {id: req.params.hostId},
+            include: {
+                model: User,
+                attributes: ['name'],
+            },
+        });
+        res.render('reservation', {host});
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
 
 //예약 확인
 router.post('/reservationChecking/:hostId', async (req, res, next) => {
@@ -148,8 +164,29 @@ router.post('/reservationChecking/:hostId', async (req, res, next) => {
 });
 
 // 예약 하기
-router.post('/reservation/:hostId', (req, res) => {
-    console.log(req);
+router.post('/reservation/:hostId', async (req, res, next) => {
+    console.log(req.body);
+    const {
+        checkin,
+        checkout,
+        userName,
+        phone,
+    } = req.body;
+    try {
+        const reservation = await Reservation.create({
+            checkIn: checkin,
+            checkout,
+            reservationUserName: userName,
+            reservationPhone: phone,
+            UserId: req.user.id,
+            HostId: req.params.hostId,
+        });
+        console.log(reservation);
+        res.json({reservationsuccess: true, message: `${checkin} ~ ${checkout} 일정의 예약이 완료되었습니다.`});
+    } catch(error) {
+        console.error(error);
+        next(error);
+    }
 });
 // 게시글 상세 가져오기
 router.get('/:postid', async (req, res, next) => {

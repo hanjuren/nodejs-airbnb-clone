@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<div class="userInfo__div">
+    <div class="userinfo__title">
+        <h3>내 정보</h3>
+    </div>
+    <form id="userInfo__form">
+        <div class="userinfo__content">
+            <div class="userinfo__emil">
+                <label>Email : </label>
+                <input type="text" name="email" value="{{user.email}}" />
+            </div>
+            <div class="userinfo__name">
+                <label>Name : </label>
+                <input type="text" name="name" value="{{user.name}}" />
+            </div>
+            <div class="userinfo__nick">
+                <label>Nick : </label>
+                <input type="text" name="nickname" value="{{user.nickname}}" />
+            </div>
+            <div class="userinfo__phone">
+                <label>Phone : </label>
+                <input type="text" id="firstphone" name="first" />
+                <p>-</p>
+                <input type="text" id="middlephone" name="middle" />
+                <p>-</p>
+                <input type="text" id="lastphone" name="last" />
+            </div>
+            <div class="userinfo__chage">
+                <button type="submit" id="userInfoChange">Save</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="myReservation">
+        <h3>내 예약 정보</h3>
+    </div>
+
+    {% for reservation in UserReservation %}
+    <div class="myReservation__info">
+        <div class="myReservation__HostInfo">
+            <h4>{{reservation.Host.title}}</h4>
+            <div class="myReservation__HostInfo__titleImage">
+                <img src="../{{reservation.Host.Images[0].src}}" alt="" />
+            </div>
+            <h5>{{reservation.Host.hostaddress}}</h5>
+        </div>
+        <div class="myReservation__checkin">
+            <h5>체크인 : {{reservation.checkIn}}</h5>
+            <h5>체크아웃 : {{reservation.checkout}}</h5>
+        </div>
+        <div class="myReservation__userInfo">
+            <h5>예약하신 이름 : {{reservation.reservationUserName}}</h5>
+            <h5>전화번호 : {{reservation.reservationPhone}}</h5>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+{% block script %}
+<script>
+    const phone = `{{ user.phone }}`;
+
+    const firstNum = phone.substr(0, [3]);
+    const middleNum = phone.substr(3, [4]);
+    const lastNum = phone.substr(7, [4]);
+
+    const first = document.getElementById('firstphone');
+    const middle = document.getElementById('middlephone');
+    const last = document.getElementById('lastphone');
+
+    first.value = firstNum;
+    middle.value = middleNum;
+    last.value = lastNum;
+</script>
+{% endblock%}
