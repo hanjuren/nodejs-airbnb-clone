@@ -11,6 +11,14 @@ module.exports = class Reservation extends Sequelize.Model{
                 type: Sequelize.DATEONLY,
                 allowNull: false,
             },
+            reservationUserName: {
+                type: Sequelize.STRING(20),
+                allowNull: false,
+            },
+            reservationPhone: {
+                type: Sequelize.STRING(20),
+                allowNull: false,
+            }
         }, {
             sequelize,
             timestamps: true,
