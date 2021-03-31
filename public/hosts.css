@@ -1,13 +1,16 @@
 .hosts__Content {
     width: 100%;
+    height: 90vh;
+    padding: 0;
     display: flex;
+    flex: 1;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     border-top: 1px solid lightgray;
 }
 .hosts__top {
     width: 90%;
+    height: 100px;
     padding: 20px;
     margin-left: 40px;
 }
@@ -17,16 +20,17 @@
 }
 .hosts__div {
     width: 90%;
+    height: 100%;
     padding-top: 20px;
     margin-bottom: 100px;
     display: grid;
     grid-template-columns: repeat(4, 1fr) !important;
     grid-auto-flow: row !important;
     place-items: center;
-    row-gap: 25px;
+    row-gap: 15px;
 }
 .hosts__info {
-    width: 300px;
+    width: 400px;
     cursor: pointer;
 }
 .hosts__info:hover {
@@ -37,16 +41,17 @@
     color: black;
 }
 .hosts__info img {
-    width: 300px;
-    height: 200px;
+    width: 400px;
+    height: 250px;
     border-radius: 15px;
 }
 #paging {
     width: 30%;
+    padding-bottom: 100px;
     display: flex;
     justify-content: center;
+    align-content: flex-end;
     align-items: center;
-    padding-bottom: 100px;
 }
 #paging a {
     display: flex;
