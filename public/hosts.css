@@ -1,6 +1,6 @@
 .hosts__Content {
     width: 100%;
-    height: 90vh;
+    height: 100%;
     padding: 0;
     display: flex;
     flex: 1;
@@ -8,11 +8,36 @@
     align-items: center;
     border-top: 1px solid lightgray;
 }
+.search__type {
+    width: 90%;
+    height: 100px;
+    margin: 50px 0 0 40px;
+    border-bottom: 1px solid lightgray;
+}
+.search__type a {
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 20px;
+    background-color: #f5908b;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+}
+.search__type a:hover {
+    background-color: white;
+    border: 1px solid lightgray;
+    color: black;
+}
+
 .hosts__top {
     width: 90%;
     height: 100px;
     padding: 20px;
     margin-left: 40px;
+    margin-top: 10px;
 }
 .hosts__top h3 {
     font-size: 30px;
@@ -20,7 +45,7 @@
 }
 .hosts__div {
     width: 90%;
-    height: 100%;
+    height: fit-content;
     padding-top: 20px;
     margin-bottom: 100px;
     display: grid;

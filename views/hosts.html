@@ -3,9 +3,23 @@
 {% block main %}
 
 <div class="hosts__Content">
+
+    <div class="search__type">
+        <a href="?city={{city}}">{{city}}전체</a>
+        <a href="?city={{city}}&category=호텔">호텔</a>
+        <a href="?city={{city}}&category=모텔">모텔</a>
+        <a href="?city={{city}}&category=펜션">펜션</a>
+        <a href="?city={{city}}&category=글램핑">글램핑</a>
+        <a href="?city={{city}}&category=개인 숙소">개인 숙소</a>
+    </div>
+    {% if hosts.length !== 0 %}
     <div class="hosts__top">
         <p>총 {{count}}개의 숙소</p>
-        <h3>{{city}}의 숙소</h3>
+        {% if category %}
+        <h3>{{city}}의 {{category}}</h3>
+        {% else %}
+        <h3>{{city}} 숙소</h3>
+        {% endif %}
     </div>
     <div class="hosts__div" id={{city}}>
         {% for host in hosts %}
@@ -20,6 +34,11 @@
         {% endfor %}
     </div>
     <div id="paging"></div>
+    {% else %}
+    <div class="hosts__top">
+        <h3>검색 결과가 없습니다.</h3>
+    </div>
+    {% endif %}
 </div>
 
 
@@ -84,6 +103,9 @@
     $("document").ready(function () {
         paging(totalData, dataPerPage, pageCount, 1);
     });
+
+
+
 
 
 </script>
