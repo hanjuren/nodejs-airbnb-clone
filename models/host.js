@@ -36,7 +36,11 @@ module.exports = class Host extends Sequelize.Model{
                 allowNull: false,
             },
             hostinfo: {
-                type: Sequelize.STRING(500),
+                type: Sequelize.STRING(1500),
+                allowNull: false,
+            },
+            hosttype: {
+                type: Sequelize.STRING(20),
                 allowNull: false,
             },
         }, {

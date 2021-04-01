@@ -1,93 +1,150 @@
+/* 숙소 업로드 페이지 */
 .host {
     width: 100%;
-    height: 80vh;
+    height: 100%;
+    border-top: 2px solid lightgray;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    flex-direction: column;
+    flex-direction: column; 
+    padding-bottom: 100px;
 }
-.host::before {
-    content: "";
-    background-image: url("https://i1.wp.com/kiramonthly.com/wp-content/uploads/2018/10/1810_6@airbnb-dublin-office-interiors-ireland-offices_dezeen_hero03.jpg?resize=1000%2C563");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    opacity: 0.5;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-}
-.host form,
-.host__info {
-    z-index: 100;
-}
-.host__info {
-    position: absolute;
-    top: 30px;
-    left: 100px;
-}
-.host__info h3 {
-    margin: 0;
-    font-size: 25px;
-}
-.host form {
-    display: flex;
-    flex-direction: column;
-    width: 900px;
-    background-color: white;
-    border: 1px solid lightgray;
-    padding: 10px;
-    border-radius: 15px;
-    opacity: 0.9;
-}
-.host form input {
-    width: 650px;
-    padding: 15px;
-    margin-bottom: 15px;
-    border: 1px solid lightgray;
-    border-radius: 20px;
-    outline: none;
-}
-.host form select {
+.host select {
     width: 200px;
-    margin-bottom: 20px;
-    padding: .8em .5em;
-    background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
-    border: none;   
-    border-bottom: 1px solid lightgray;
-    border-radius: 0px; /* iOS 둥근모서리 제거 */ 
-    -webkit-appearance: none; /* 네이티브 외형 감추기 */
-    -moz-appearance: none; 
-    appearance: none;
+    margin-top: 20px;
+    border: none;
+    border-bottom: 2px solid lightgray;
+    padding: 10px;
+    font-size: 17px;
     outline: none;
 }
 
-.host form textarea {
-    resize: none;
-    height: 130px;
+.host__info {
+    width: 100%;
+    margin-top: 60px;
+}
+.host__info h2 {
+    margin-left: 200px;
+}
+
+.hosting__title {
+    width: 100%;
+    margin-top: 50px;
+}
+.hosting__title h3,
+.hosting__title input {
+    margin-left: 200px;
+}
+.hosting__title input {
+    margin-top: 20px;
+    border: none;
+    border-bottom: 2px solid lightgray;
+    width: 900px;
+    font-size: 17px;
     outline: none;
-}
-#img {
-    width: 200px;
-}
-#host__btn {
-    border-radius: 10px;
     padding: 10px;
-    width: 320px;
-    border: 1px solid lightgray;
-    background-color: #ff7777;
-    font-size: 16px;
-    font-weight: 600;
-    color: white;
-    cursor: pointer;
+}
+
+.hosting__hosttype {
+    width: 100%;
+    margin-top: 50px;
+}
+.hosting__hosttype h3,
+.hosting__hosttype select {
+    margin-left: 200px;
+}
+
+
+.hosting__person {
+    width: 100%;
+    margin-top: 50px;
+}
+.hosting__person h3,
+.hosting__person select {
+    margin-left: 200px;
+}
+
+.hosting__address {
+    width: 100%;
+    margin-top: 50px;
+}
+.hosting__address h3,
+.hosting__address select {
+    margin-left: 200px;
+}
+#middle__city {
+    margin-left: 100px;
+}
+
+.hosting__detailAddress {
+    width: 100%;
+    margin-top: 30px;
+}
+.hosting__detailAddress input {
+    margin: 10px 0 0 200px;
+    border: none;
+    border-bottom: 2px solid lightgray;
+    width: 900px;
+    font-size: 17px;
     outline: none;
-    align-self: center;
+    padding: 10px;
 }
-#host__btn:hover {
-    opacity: 0.7;
+
+.hosting__rommInfo {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
 }
+.hosting__rommInfo h3,
+.hosting__rommInfo select {
+    margin-left: 200px;
+}
+
+.hosting__textarea {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+.hosting__textarea h3,
+.hosting__textarea textarea,
+.hosting__textarea input {
+    margin-left: 200px;
+}
+
+.hosting__textarea textarea {
+    width: 1000px;
+    height: 500px;
+    outline: none;
+    resize: none;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.hosting__textarea input[type="file"] {
+    margin: 10px 0 0 200px;
+    border: none;
+    border-bottom: 2px solid lightgray;
+    width: 500px;
+    font-size: 17px;
+    outline: none;
+    padding: 10px;
+    
+}
+
+#host__btn {
+    margin: 50px 0 0 200px;
+    width: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f19393;
+    border: none;
+    font-size: 18px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
 /* 호스트 상세페이지 */
 
 .host__container {

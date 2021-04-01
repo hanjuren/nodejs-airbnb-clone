@@ -50,6 +50,7 @@ router.post('/host', isLoggedIn, upload.array('img'), async (req, res, next) => 
             roominfo_cook: req.body.cook,
             roominfo_bathroom: req.body.bathroom,
             hostinfo: req.body.hostinfo,
+            hosttype: req.body.hosttype,
             UserId: req.user.id,
         });
         for(i=0; i<req.files.length; i++){
