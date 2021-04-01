@@ -1,11 +1,13 @@
 const express = require('express');
 const session = require('express-session');
+const MysqlStore = require('express-mysql-session')(session);
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 const path = require('path');
 const passport = require('passport');
+
 
 dotenv.config();
 
@@ -51,6 +53,13 @@ app.use(session({
         httpOnly: true,
         secure: false,
     },
+    store: new MysqlStore({
+        host: 'localhost',
+        port: 3306,
+        user: 'root',
+        password: process.env.SESSION_MYSQL_PASSWORD,
+        database: 'airbnbclone'
+      })
 }));
 
 app.use(passport.initialize());

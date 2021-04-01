@@ -52,6 +52,12 @@ router.get('/userinfo', isLoggedIn, async (req, res, next) => {
     }
 });
 
+router.get('/logout', isLoggedIn, (req, res) => {
+    req.logout();
+    req.session.destroy();
+    res.redirect('/');
+});
+
 
 
 
