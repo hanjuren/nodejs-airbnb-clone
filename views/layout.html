@@ -28,10 +28,12 @@
         <a href="/"><img class="header__icon"
                 src="https://i.pinimg.com/564x/04/57/14/0457144332ce38550077355621165d24.jpg" alt="" /></a>
 
-        <div class="header__center">
-            <input type="text" placeholder="검색 시작하기" />
-            <i class="fas fa-search"></i>
-        </div>
+        <form id="search-form" action="/post/city">
+            <div class="header__center">
+                <input type="text" name="city" placeholder="여행지 검색을 통해 빠른 예약을 해보세요" />
+                <button type="submit" id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
         <div class="header__right">
             {% if user and user.id and user.hostAvailability === true %}
             <a href="/host">

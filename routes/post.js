@@ -67,6 +67,47 @@ router.post('/host', isLoggedIn, upload.array('img'), async (req, res, next) => 
     }
 });
 
+router.get('/search', async (req, res, next) => {
+    
+    const place = req.query.place;
+
+    try {
+        let pageNum = req.query.pagenum; // 요청 페이지 넘버
+        let offset = 0;
+
+        if(pageNum > 1){
+            offset = 12 * (pageNum - 1);
+        }
+
+        const hosts = await Host.findAll({
+            where: {
+                city: { 
+                    [Op.like] : "%" + place + "%"    
+                },
+            },
+            include: {
+                model: Image,
+                attributes: ['src'],
+            },
+            order: [['id', 'DESC']],
+            offset: offset,
+            limit: 12,
+        });
+        const count = await Host.count({
+            where: {
+                city: {
+                    [Op.like]: "%" + place + "%"
+                },
+            },
+        });
+        const city = req.query.place;
+        res.render('hosts', {hosts, count, city});
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
 
 // 도시별 게시물 가져오기
 router.get('/city', async (req, res, next) => {
