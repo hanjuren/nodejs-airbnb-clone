@@ -82,9 +82,10 @@ router.get('/city', async (req, res, next) => {
         let hosts;
         let count;
         let city;
-        // 카테고리 선택시
-        if(req.query.category) {
-            const category = req.query.category;
+        let category
+        // 도시별 카테고리 선택시
+        if(req.query.category && req.query.city) {
+            category = req.query.category;
             hosts = await Host.findAll({
                 where: {
                     hostaddress: {
@@ -115,6 +116,50 @@ router.get('/city', async (req, res, next) => {
             city = req.query.city;
             
             res.render('hosts', {hosts, count, city, category});
+        }
+        // 전체 도시의 카테고리별
+        else if(req.query.category) {
+            category = req.query.category;
+            if(category === "전체") {
+                hosts = await Host.findAll({
+                    include: {
+                        model: Image,
+                        attributes: ['src'],
+                    },
+                    order: [['id', 'DESC']],
+                    offset: offset,
+                    limit: 12,
+                });
+                count = await Host.count({});
+                
+                res.render('hosts', {hosts, count, category});
+            }
+            else {
+                hosts = await Host.findAll({
+                    where: {
+                        hosttype: {
+                            [Op.like]: "%" + category + "%"
+                        },
+                    },
+                    include: {
+                        model: Image,
+                        attributes: ['src'],
+                    },
+                    order: [['id', 'DESC']],
+                    offset: offset,
+                    limit: 12,
+                });
+                count = await Host.count({
+                    where: {
+                        hosttype: {
+                            [Op.like]: "%" + category + "%"
+                        },
+                    },
+                });
+                
+                res.render('hosts', {hosts, count, category});
+            }
+
         }
         // 도시별로만 가져오기
         else {

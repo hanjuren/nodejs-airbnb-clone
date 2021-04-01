@@ -7,7 +7,7 @@
     </div>
 </div>
 <div class="city__place">
-    <section>가까운 여행지 둘러보기</section>
+    <section>도시별 여행지 둘러보기</section>
     <div class="city__info">
         <div class="city" id="서울">
             <img src="https://a0.muscache.com/im/pictures/71e23854-a3c7-491c-b715-6e86233a293f.jpg?im_q=medq&im_w=240"
@@ -50,6 +50,42 @@
             <p>제주 특별자치도</p>
         </div>
     </div>
+    <div class="category__info">
+        <section>여행은 어디에나 살아보는거야</section>
+        <div class="category__box">
+            <div class="search__category" id="개인숙소">
+                <img src="https://a0.muscache.com/im/pictures/7d82ca14-56e5-4465-8218-dcfa7d69b6ac.jpg?im_w=480"
+                    alt="" />
+                <p>집 전체</p>
+            </div>
+            <div class="search__category" id="펜션">
+                <img src="https://a0.muscache.com/im/pictures/36f53e61-db8d-403c-9122-5b761c0e4264.jpg?im_w=480"
+                    alt="" />
+                <p>펜션 전체</p>
+            </div>
+            <div class="search__category" id="호텔">
+                <img src="https://media.cntraveler.com/photos/5f723c317dadd5092527e64e/16:9/w_2560%2Cc_limit/OneHotelBrooklynBridge-NYC-Hotel-2020-2.jpg"
+                    alt="" />
+                <p>호텔 전체</p>
+            </div>
+            <div class="search__category" id="모텔">
+                <img src="https://media.cntraveler.com/photos/5a8d7de8a2fdaf4c74bb60ae/16:9/w_2560%2Cc_limit/The-Williamsburg-Hotel_1704_WB_Room410_126.jpg"
+                    alt="" />
+                <p>모텔 전체</p>
+            </div>
+            <div class="search__category" id="글램핑">
+                <img src="https://a0.muscache.com/im/pictures/7f254627-3922-4880-b8fa-545b8551117e.jpg?im_w=480"
+                    alt="" />
+                <p>글램핑 전체</p>
+            </div>
+            <div class="search__category" id="전체">
+                <img src="https://media.cntraveler.com/photos/591ca699452a0b1d1cfbec3e/16:9/w_1600%2Cc_limit/hotel-pools-1-Hotel-Brooklyn-Bridge-cr-courtesy.jpg"
+                    alt="" />
+                <p>모든 숙소</p>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 
@@ -59,13 +95,25 @@
 
     const city = document.querySelectorAll('.city').forEach(function (tag) {
         tag.addEventListener('click', function () {
-            console.log(tag.id);
+
             const city = encodeURI(tag.id);
-            console.log(city);
+
             window.location = `/post/city?city=${city}`;
 
         });
     });
+
+    document.querySelectorAll('.search__category').forEach(function (tag) {
+        tag.addEventListener('click', function () {
+
+            const category = encodeURI(tag.id);
+            console.log(tag.id);
+            window.location = `/post/city?category=${category}`;
+
+        });
+    });
+
+
 
 </script>
 {% endblock %}

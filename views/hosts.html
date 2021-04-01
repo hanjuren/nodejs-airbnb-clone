@@ -15,10 +15,16 @@
     {% if hosts.length !== 0 %}
     <div class="hosts__top">
         <p>총 {{count}}개의 숙소</p>
-        {% if category %}
+        {% if category and city%}
         <h3>{{city}}의 {{category}}</h3>
-        {% else %}
+        {% elif city %}
         <h3>{{city}} 숙소</h3>
+        {% elif category %}
+        {% if category !== "전체" %}
+        <h3>{{category}} 전체</h3>
+        {% else %}
+        <h3>숙소 전체</h3>
+        {% endif %}
         {% endif %}
     </div>
     <div class="hosts__div" id={{city}}>
