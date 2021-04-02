@@ -75,5 +75,43 @@
     first.value = firstNum;
     middle.value = middleNum;
     last.value = lastNum;
+
+    // 이메일 검사
+    const emailCheck = (email) => {
+        const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+        if (!reg_email.test(email)) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
+    document.getElementById('userInfo__form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const changeData = {
+            email: e.target.email.value,
+            nickname: e.target.nickname.value,
+            phone: e.target.firstphone.value + e.target.middlephone.value + e.target.lastphone.value,
+        }
+        console.log(changeData);
+        if (changeData.email !== "" && !emailCheck(changeData.email)) {
+            return alert('올바르지 않은 이메일 형식입니다.');
+        }
+        if (changeData.email === "") {
+            return alert('이메일을 입력해주세요.');
+        }
+
+        axios.post('/auth/userChange', changeData)
+            .then((response) => {
+                if (response.data.success) {
+                    return location.reload();
+                }
+            })
+            .catch((error) => {
+                return alert(error);
+            });
+
+
+    });
 </script>
 {% endblock%}

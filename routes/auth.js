@@ -102,4 +102,25 @@ router.put('/hostapply',isLoggedIn, async (req, res, next) => {
     }
 });
 
+router.post('/userChange', async (req, res, next) => {
+    const {
+        email,
+        nickname,
+        phone,
+    } = req.body
+
+    try {
+        await User.update({
+            email,
+            nickname,
+            phone,
+        }, {
+            where: {id: req.user.id},
+        });
+        res.json({success: true});
+    } catch (error) {
+        next(error);
+    }
+});
+
 module.exports = router;    
