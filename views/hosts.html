@@ -5,12 +5,36 @@
 <div class="hosts__Content">
 
     <div class="search__type">
+        {% if city === "전체" %}
+        <a href="?category=전체">전체</a>
+        {% else %}
         <a href="?city={{city}}">{{city}}전체</a>
+        {% endif %}
+        {% if city %}
         <a href="?city={{city}}&category=호텔">호텔</a>
+        {% else %}
+        <a href="?category=호텔">호텔</a>
+        {% endif %}
+        {% if city %}
         <a href="?city={{city}}&category=모텔">모텔</a>
+        {% else %}
+        <a href="?category=모텔">모텔</a>
+        {% endif %}
+        {% if city %}
         <a href="?city={{city}}&category=펜션">펜션</a>
+        {% else %}
+        <a href="?category=펜션">펜션</a>
+        {% endif %}
+        {% if city %}
         <a href="?city={{city}}&category=글램핑">글램핑</a>
+        {% else %}
+        <a href="?category=글램핑">글램핑</a>
+        {% endif %}
+        {% if city %}
         <a href="?city={{city}}&category=개인 숙소">개인 숙소</a>
+        {% else %}
+        <a href="?category=개인 숙소">개인 숙소</a>
+        {% endif %}
     </div>
     {% if hosts.length !== 0 %}
     <div class="hosts__top">

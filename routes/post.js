@@ -35,10 +35,7 @@ const upload = multer({
 // 게시글 업로드
 router.post('/host', isLoggedIn, upload.array('img'), async (req, res, next) => {
     const hostaddress = req.body.firstCity.concat(" ", req.body.middleCity," ", req.body.hostaddress);
-    //const re = /\r\n/g;
-    //const hostinfo = req.body.hostinfo.replace(re, `<br>`);
-    //console.log(req.body.firstCity);
-    //console.log(req.files);
+
     try{
         const newHost = await Host.create({
             title: req.body.title,
@@ -185,7 +182,13 @@ router.get('/city', async (req, res, next) => {
                     },
                 },
             });
-            city = req.query.city;
+            if(req.query.city) {
+                city = req.query.city;
+            } else {
+                city = "전체"
+            }
+            console.log(hosts);
+            console.log(count);
             res.render('hosts', {hosts, count, city});
         }
         
