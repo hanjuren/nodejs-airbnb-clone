@@ -460,3 +460,18 @@
 .myReservation__userInfo h5 {
     margin-top: 10px;
 }
+
+#reviewWrite {
+    margin: 10px 0 0 15px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    padding: 10px;
+    width: 100px;
+    font-weight: 700;
+    outline: none;
+}
+#reviewWrite:hover {
+    background-color: #f5a6a6
+}

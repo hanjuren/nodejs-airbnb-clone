@@ -57,6 +57,32 @@
 
     </div>
     {% endfor %}
+
+    <div class="myReservation">
+        <h3>이용 완료 내역</h3>
+    </div>
+
+    {% for reservation in ReservationSuccess %}
+    <div class="myReservation__info">
+        <div class="myReservation__HostInfo">
+            <h4>{{reservation.Host.title}}</h4>
+            <div class="myReservation__HostInfo__titleImage">
+                <img src="../{{reservation.Host.Images[0].src}}" alt="" />
+            </div>
+            <h5>{{reservation.Host.hostaddress}}</h5>
+        </div>
+        <div class="myReservation__checkin">
+            <h5>체크인 : {{reservation.checkIn}}</h5>
+            <h5>체크아웃 : {{reservation.checkout}}</h5>
+        </div>
+        <div class="myReservation__userInfo">
+            <h5>예약하신 이름 : {{reservation.reservationUserName}}</h5>
+            <h5>전화번호 : {{reservation.reservationPhone}}</h5>
+        </div>
+        <button id="reviewWrite" value="{{reservation.id}}">🖊 리뷰 작성</button>
+
+    </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
@@ -110,8 +136,32 @@
             .catch((error) => {
                 return alert(error);
             });
+    });
 
+    // 리뷰 작성 가능 여부 확인
+    // 리뷰는 체크인 후 일주일 동안 작성이 가능하다.
+    document.querySelectorAll('#reviewWrite').forEach(function (tag) {
+        tag.addEventListener('click', function () {
+            const reservationId = tag.value;
 
+            axios.get('/review/checking', {
+                params: {
+                    reservationId,
+                },
+            })
+                .then((response) => {
+                    if (response.data.success) {
+                        alert(response.data.message);
+                        return window.location = "/";
+                    } else {
+                        alert(response.data.message);
+                        return location.reload();
+                    }
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        });
     });
 </script>
 {% endblock%}
