@@ -54,7 +54,7 @@
     <div class="hosts__div" id={{city}}>
         {% for host in hosts %}
         <div class="hosts__info">
-            <a href="/post/{{host.id}}">
+            <a href="/host/{{host.id}}">
                 <img src="../{{host.Images[0].src}}" alt="" />
                 {% set hostTitle = host.title.substring(0, 20) %}
                 <p>{{host.city}}</p>
@@ -108,7 +108,7 @@
             html += "<a href=# id='prev'><</a> ";
 
         for (let i = first; i <= last; i++) {
-            html += "<a href=/post/city?city={{city}}&pagenum=" + i + " id=" + i + ">" + i + " </a> ";
+            html += "<a href=/host/city?city={{city}}&pagenum=" + i + " id=" + i + ">" + i + " </a> ";
         }
 
         if (last < totalPage)

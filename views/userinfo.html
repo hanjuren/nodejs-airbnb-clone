@@ -79,7 +79,12 @@
             <h5>예약하신 이름 : {{reservation.reservationUserName}}</h5>
             <h5>전화번호 : {{reservation.reservationPhone}}</h5>
         </div>
+        {% if reservation.Reviews.length === 0 %}
         <button id="reviewWrite" value="{{reservation.id}}">🖊 리뷰 작성</button>
+        {{reservation.Reviews}}
+        {% else %}
+        <button id="reviewUpdate" value="{{reservation.id}}">🖊 리뷰 수정</button>
+        {% endif %}
 
     </div>
     {% endfor %}
@@ -130,7 +135,7 @@
         axios.post('/auth/userChange', changeData)
             .then((response) => {
                 if (response.data.success) {
-                    return location.reload();
+                    return window.location = "/review";
                 }
             })
             .catch((error) => {
@@ -152,7 +157,7 @@
                 .then((response) => {
                     if (response.data.success) {
                         alert(response.data.message);
-                        return window.location = "/";
+                        return window.location = "/review";
                     } else {
                         alert(response.data.message);
                         return location.reload();

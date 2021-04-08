@@ -15,6 +15,9 @@ dotenv.config();
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const postRouter = require('./routes/post');
+const reviewRouter = require('./routes/review');
+const hostRouter = require('./routes/host');
+const reservationRouter = require('./routes/reservation');
 //시퀄라이즈 불러오기
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
@@ -29,7 +32,7 @@ nunjucks.configure('views', {
 });
 
 //시퀄라이즈 설정
-sequelize.sync( { force: true })
+sequelize.sync( { force: false })
     .then(() => {
         console.log('데이터 베이스 연결 성공.');
     })
@@ -68,6 +71,9 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/post', postRouter);
+app.use('/review', reviewRouter);
+app.use('/host', hostRouter);
+app.use('/reservation', reservationRouter);
 
 app.use( (req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

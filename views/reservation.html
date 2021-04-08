@@ -164,11 +164,11 @@
             const last = phoneNum.substr(13, [4]);
             const phone = `${first}${middle}${last}`;
 
-            axios.post(`/post/reservation/{{host.id}}`, { userName, phone, checkin, checkout })
+            axios.post(`/reservation/{{host.id}}`, { userName, phone, checkin, checkout })
                 .then((response) => {
                     if (response.data.reservationsuccess) {
                         alert(response.data.message);
-                        return window.location = "/";
+                        return window.location = "/userinfo";
                     }
                     alert(response.data.message);
                     return location.reload();

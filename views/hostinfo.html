@@ -107,14 +107,14 @@
         const checkin = document.querySelector('#checkinfilter').value;
         const checkout = document.querySelector('#checkoutfilter').value;
 
-        axios.post(`/post/reservationChecking/{{host.id}}`, { checkin, checkout })
+        axios.post(`/reservation/reservationChecking/{{host.id}}`, { checkin, checkout })
             .then((response) => {
                 if (response.data.success) {
                     const result = confirm('예약이 가능합니다. 예약 하시겠습니까?');
                     if (result) {
                         const checkin = response.data.checkin;
                         const checkout = response.data.checkout;
-                        return window.location = `/post/reservation/{{host.id}}?checkin=${checkin}&checkout=${checkout}`;
+                        return window.location = `/reservation/{{host.id}}?checkin=${checkin}&checkout=${checkout}`;
                     }
                     return location.reload();
                 }
