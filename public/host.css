@@ -319,8 +319,8 @@
     cursor: pointer;
 }
 
-.review__div {
-    height: 300px;
+.hostinfo__review__div {
+    width: 100%;
 }
 .review__div h2{
     margin-top: 15px;

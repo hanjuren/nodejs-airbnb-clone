@@ -75,10 +75,14 @@
             </div>
         </div>
 
-        <div class="review__div">
+        <div class="hostinfo__review__div">
             <h2>후기</h2>
         </div>
-
+        {% for review in host.Reviews %}
+        <h3>{{review.User.name}}</h3>
+        <h3>{{review.comment}}</h3>
+        {{review.satisfaction}}
+        {% endfor %}
     </div>
 
 </div>
