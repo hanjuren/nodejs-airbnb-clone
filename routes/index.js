@@ -67,13 +67,13 @@ router.get('/userinfo', isLoggedIn, async (req, res, next) => {
                 },
                 {
                     model: Review,
-                    attributes: ['title', 'content'],
+                    attributes: ['id'],
                     
                 },
             ],
             order: [['id', 'DESC']],
         });
-        
+        console.log(ReservationSuccess);
         res.render('userinfo', {title: "내정보", UserReservation, ReservationSuccess});
     } catch(error) {
         console.error(error);

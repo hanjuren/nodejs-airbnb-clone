@@ -1,14 +1,37 @@
 const express = require('express');
-const { Reservation } = require('../models');
+const { Reservation, Host, User, Review } = require('../models');
 const dateFormat = require('dateformat');
-const {isLoggedIn} = require('./middlewares');
+const {isLoggedIn, reservationUserCheck} = require('./middlewares');
+
 
 
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render('review');
+router.get('/', reservationUserCheck, async(req, res, next) => {
+    const Id = req.query.reservationId;
+    try {
+        const info = await Reservation.findOne({
+            where: {
+                id: Id,
+            },
+            attributes: ['id','checkIn', 'checkout'],
+            include: [
+                {
+                    model: Host,
+                    attributes: ['id','title'],
+                },
+                {
+                    model: User,
+                    attributes: ['id', 'name'],
+                },
+            ],
+        });
+        res.render('review', {title: "리뷰 작성하기", info});
+    } catch(error) {
+        console.error(error);
+        next(error);
+    }
 });
 
 router.get('/checking', isLoggedIn, async (req, res, next) => {
@@ -42,5 +65,33 @@ router.get('/checking', isLoggedIn, async (req, res, next) => {
         next(error);
     }
 });
+
+router.post('/write/:reservationId', async(req, res, next) => {
+    const { comment, satisfaction } = req.body;
+    const Id = req.params.reservationId;
+    try {
+        const reservationid = await Reservation.findOne({
+            where: { id: Id },
+            attributes: ['UserId', 'HostId'],
+        });
+        if(reservationid.UserId === req.user.id) {
+            await Review.create({
+                comment,
+                satisfaction,
+                UserId: reservationid.UserId,
+                HostId: reservationid.HostId,
+                ReservationId: Id,
+            });
+            res.json({success: true, message: "리뷰 작성에 성공했습니다."});
+        } else {
+            res.json({ success: false, message: "리뷰 작성 권한이 없습니다."});
+        }
+    } catch(error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+
 
 module.exports = router;

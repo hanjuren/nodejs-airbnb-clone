@@ -461,7 +461,8 @@
     margin-top: 10px;
 }
 
-#reviewWrite {
+#reviewWrite,
+#reviewUpdate {
     margin: 10px 0 0 15px;
     border: 1px solid lightgray;
     border-radius: 5px;
@@ -472,6 +473,7 @@
     font-weight: 700;
     outline: none;
 }
-#reviewWrite:hover {
+#reviewWrite:hover,
+#reviewUpdate:hover {
     background-color: #f5a6a6
-}
+} 

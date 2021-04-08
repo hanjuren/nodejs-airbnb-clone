@@ -1,5 +1,110 @@
 {% extends 'layout.html' %}
 
 {% block main %}
-<h1>꺼져</h1>
+<div class="review__div">
+    <div class="review__top">
+        <h3>리뷰작성은 호스트에게 큰 도움이 됩니다.</h3>
+    </div>
+
+    <div class="review__reservation__info">
+        <h3>예약 정보</h3>
+    </div>
+    <div class="review__reservation__checkin">
+        <h3>{{info.Host.title}}</h3>
+        <div class="review__checkin__box">
+            <div class="review__checkin__info">
+                <p>체크인</p>
+                <h5 id="checkinInfo">{{info.checkIn}}</h5>
+            </div>
+            <div class="review__daterange">
+                <p id="dayCount"></p>
+            </div>
+            <div class="review__checkout__info">
+                <p>체크아웃</p>
+                <h5 id="checkoutInfo">{{info.checkout}}</h5>
+            </div>
+        </div>
+    </div>
+    <form id="review-form">
+        <div class="review__middle">
+            <h3>리뷰 작성</h3>
+        </div>
+        <div class="review__write">
+            <h3>{{info.User.name}} 님 {{info.Host.title}}로 떠나본 여행은 어떠셨습니까?</h3>
+            <div class="satisfaction">
+                <h3>여행의 만족도를 선택해주십시오. 고객님의 선택으로 더 좋은 호스트가 될 것입니다.</h3>
+
+                <div class="satisfaction__check">
+                    <label class="box-radio-input">
+                        <input type="radio" name="satisfaction" value="매우 만족" checked="checked">
+                        <span>매우 좋았어요👍👍</span>
+                    </label>
+                    <label class="box-radio-input">
+                        <input type="radio" name="satisfaction" value="만족">
+                        <span>좋았어요👍</span>
+                    </label>
+                    <label class="box-radio-input">
+                        <input type="radio" name="satisfaction" value="보통">
+                        <span>보통이네요👌</span>
+                    </label>
+                    <label class="box-radio-input">
+                        <input type="radio" name="satisfaction" value="불만족">
+                        <span>나빴어요👎</span>
+                    </label>
+                    <label class="box-radio-input">
+                        <input type="radio" name="satisfaction" value="매우 불만족">
+                        <span>매우 나빴어요👎👎</span>
+                    </label>
+                </div>
+
+
+                <h3>호스트에게 전달 하고 싶은 말씀 또는 숙소에 대한 코멘트를 남겨 주세요.</h3>
+                <div class="review__comment">
+                    <textarea name="comment" id="comment" cols="30" placeholder="아름다운 리뷰는 호스트를 더 발전시킵니다."></textarea>
+                </div>
+
+            </div>
+            <div class="review__bottom">
+                <button id="review__btn" type="submit">리뷰 작성</button>
+            </div>
+    </form>
+</div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    function searchParam(key) {
+        return new URLSearchParams(location.search).get(key);
+    };
+    const Id = searchParam('reservationId');
+    console.log(Id);
+
+    document.getElementById('review-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const reviewData = {
+            comment: e.target.comment.value,
+            satisfaction: e.target.satisfaction.value,
+        }
+
+        if (reviewData.comment === "") {
+            return alert('리뷰 코멘트를 작성해주세요.');
+        }
+
+        axios.post(`/review/write/${Id}`, reviewData)
+            .then((response) => {
+                if (response.data.success) {
+                    alert(response.data.message);
+                    return window.location = "/userinfo";
+                } else {
+                    alert(response.data.message);
+                    return location.reload();
+                }
+            })
+            .catch((error) => {
+                return alert('서버 오류입니다.');
+            });
+
+
+    });
+</script>
 {% endblock %}

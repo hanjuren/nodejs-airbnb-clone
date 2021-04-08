@@ -1,0 +1,169 @@
+.review__div {
+    width: 100%;
+    height: 100%;
+}
+
+.review__top {
+    width: 100%;
+}
+.review__top h3 {
+    margin: 30px 0 0 200px;
+    font-size: 23px;
+}
+
+.review__reservation__info {
+    width: 10%;
+    height: 40px;
+    margin: 50px 0 0 200px;
+    border-bottom: 2px solid lightgray;
+}
+
+.review__reservation__checkin {
+    width: 50%;
+    margin: 30px 0 0 200px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid lightgray;
+}
+
+.review__checkin__box {
+    width: 500px;
+    height: 100px;
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+.review__checkin__info {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(236, 233, 233);
+    border-radius: 10px;
+    padding: 20px 0 15px 0;
+}
+
+.review__checkout__info {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(236, 233, 233);
+    border-radius: 10px;
+    padding: 20px 0 15px 0;
+}
+
+.review__checkin__info p,
+.review__checkout__info p {
+    font-size: 13px;
+    color:gray;
+    font-weight: 900;
+}
+.review__checkin__info h5,
+.review__checkout__info h5 {
+    font-size: 15px;
+    font-weight: 900;
+    margin-top: 15px;
+}
+
+.review__daterange {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 370px;
+    left: 430px;
+    width: 40px;
+    height: 30px;
+    background-color: white;
+    border-radius: 15px;
+}
+.review__daterange p {
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.review__middle {
+    width: 10%;
+    height: 40px;
+    margin: 50px 0 0 200px;
+    border-bottom: 2px solid lightgray;
+}
+
+.review__write {
+    width: 100%;
+    margin-top: 30px;
+}
+.review__write h3 {
+    margin-left: 200px;
+}
+
+.satisfaction {
+    width: 100%;
+    margin-top: 30px;
+}
+.satisfaction h3 {
+    margin-left: 200px;
+    margin-top: 20px;
+}
+
+.satisfaction__check {
+    margin: 20px 0 0 200px;
+}
+
+.box-radio-input input[type="radio"]{
+    display:none;
+}
+  
+.box-radio-input input[type="radio"] + span{
+    display:inline-block;
+    background:none;
+    border:1px solid #dfdfdf;
+    border-radius: 5px;
+    padding:0px 10px;
+    text-align:center;
+    height:35px;
+    line-height:33px;
+    font-weight:500;
+    cursor:pointer;
+}
+  
+.box-radio-input input[type="radio"]:checked + span{
+    border:1px solid #23a3a7;
+    background:#84ecf0;
+    color:#fff;
+}
+
+.review__comment {
+    width: 100%;
+}
+.review__comment textarea {
+    margin: 30px 0 0 200px;
+}
+
+#comment {
+    width: 1000px;
+    height: 500px;
+    outline: none;
+    resize: none;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.review__bottom {
+    width: 100%;
+    height: 100px;
+    margin-top: 50px;
+}
+
+#review__btn {
+    width: 150px;
+    padding: 10px;
+    margin-left: 200px;
+    border:1px solid #23a3a7;
+    border-radius: 5px;
+    background:#84ecf0;
+    outline: none;
+    cursor: pointer;
+    font-weight: 700;
+}

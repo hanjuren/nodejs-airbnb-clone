@@ -3,12 +3,12 @@ const Sequelize = require('sequelize');
 module.exports = class Review extends Sequelize.Model{
     static init(sequelize) {
         return super.init( {
-            title: {
-                type: Sequelize.STRING(100),
+            comment: {
+                type: Sequelize.STRING(500),
                 allowNull: false,
             },
-            content: {
-                type: Sequelize.STRING(300),
+            satisfaction: {
+                type: Sequelize.STRING(10),
                 allowNull: false,
             },
         }, {
