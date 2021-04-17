@@ -2,7 +2,7 @@ const express= require('express');
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 const {isLoggedIn} = require('./middlewares');
-const { Host, Image, User, Review } = require('../models');
+const { Host, Image, User, Review, Reservation } = require('../models');
 
 const router = express.Router();
 
@@ -163,10 +163,17 @@ router.get('/:hostid', async (req, res, next) => {
                 },
                 {
                     model: Review,
-                    include: {
-                        model: User,
-                        attributes: ['name'],
-                    },
+                    include: [
+                        {
+                            model: User,
+                            attributes: ['name'],
+                        },
+                        {
+                            model: Reservation,
+                            attributes: ['checkIn', 'checkout'],
+                        },
+                    ],
+                    limit: 6,
                 },  
             ],
         });

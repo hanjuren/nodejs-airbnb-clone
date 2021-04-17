@@ -29,7 +29,6 @@ router.get('/login', isNotLoggedIn, (req, res) => {
 router.get('/userinfo', isLoggedIn, async (req, res, next) => {
     try {
         const newDate = dateFormat(new Date(), "yyyy-mm-dd");
-        console.log(newDate);
         // 이용 전 숙소 정보
         const UserReservation = await Reservation.findAll({
             where: {
@@ -73,7 +72,6 @@ router.get('/userinfo', isLoggedIn, async (req, res, next) => {
             ],
             order: [['id', 'DESC']],
         });
-        console.log(ReservationSuccess);
         res.render('userinfo', {title: "내정보", UserReservation, ReservationSuccess});
     } catch(error) {
         console.error(error);

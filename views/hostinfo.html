@@ -74,18 +74,41 @@
                 <button id="order__btn">예약 가능 여부 보기</button>
             </div>
         </div>
-
-        <div class="hostinfo__review__div">
-            <h2>후기</h2>
-        </div>
-        {% for review in host.Reviews %}
-        <h3>{{review.User.name}}</h3>
-        <h3>{{review.comment}}</h3>
-        {{review.satisfaction}}
-        {% endfor %}
     </div>
-
-</div>
+    <!-- 리뷰 div -->
+    <div class="hostinfo__review__div">
+        <h2>후기</h2>
+        <a href="#" id="allRivew">리뷰 더보기..</a>
+    </div>
+    <div class="hostinfo__riview__content">
+        {% if host.Reviews.length !== 0 %}
+        {% for review in host.Reviews %}
+        <div id="hostinfo__review__content">
+            <div id="review__top">
+                <h3>{{review.User.name}} 님</h3>
+                <p>
+                    {{review.satisfaction}}
+                    {% if review.satisfaction === "매우 만족" %}
+                    👍👍
+                    {% elif review.satisfaction === "만족" %}
+                    👍
+                    {% elif review.satisfaction === "보통" %}
+                    👌
+                    {% elif review.satisfaction === "불만족" %}
+                    👎
+                    {% else %}
+                    👎👎
+                    {% endif %}
+                </p>
+            </div>
+            <p>{{review.Reservation.checkIn}} ~ {{review.Reservation.checkout}}의 일정</p>
+            <h4>{{review.comment}}</h4>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2>작성된 리뷰가 아직 없습니다..</h2>
+        {% endif %}
+    </div>
 </div>
 
 {% endblock %}
