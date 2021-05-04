@@ -36,11 +36,14 @@
     <div class="myReservation">
         <h3>내 예약 정보</h3>
     </div>
-
+    {% if UserReservation.length !== 0 %}
     {% for reservation in UserReservation %}
     <div class="myReservation__info">
         <div class="myReservation__HostInfo">
-            <h4>{{reservation.Host.title}}</h4>
+            <div class="Hostinfo__top">
+                <h4>{{reservation.Host.title}}</h4>
+                <button id="reservation-cancle" value="{{reservation.id}}">예약 취소하기</button>
+            </div>
             <div class="myReservation__HostInfo__titleImage">
                 <img src="../{{reservation.Host.Images[0].src}}" alt="" />
             </div>
@@ -57,11 +60,16 @@
 
     </div>
     {% endfor %}
+    {% else %}
+    <div class="not__reservation">
+        <p>예약 정보가 없습니다..</p>
+    </div>
+    {% endif %}
 
     <div class="myReservation">
         <h3>이용 완료 내역</h3>
     </div>
-
+    {% if ReservationSuccess.length !== 0%}
     {% for reservation in ReservationSuccess %}
     <div class="myReservation__info">
         <div class="myReservation__HostInfo">
@@ -87,6 +95,11 @@
 
     </div>
     {% endfor %}
+    {% else %}
+    <div class="not__reservation">
+        <p>예약 정보가 없습니다..</p>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}
@@ -165,6 +178,39 @@
                 .catch((error) => {
                     alert(error);
                 });
+        });
+    });
+
+    // 예약 취소 하기
+    document.querySelectorAll('#reservation-cancle').forEach(function (tag) {
+        tag.addEventListener('click', function () {
+            const reservationId = tag.value;
+
+            const question = confirm('해당 예약을 취소하시겠습니까?');
+
+            if (question) {
+                axios.get(`/reservation/cancle`, {
+                    params: {
+                        reservationId,
+                    },
+                })
+                    .then((response) => {
+                        if (response.data.success) {
+                            alert(response.data.message);
+                            return location.reload();
+                        } else {
+                            alert(response.data.message);
+                            return location.reload();
+                        }
+                    })
+                    .catch((error) => {
+                        return;
+                    });
+            }
+            else {
+                return;
+            }
+
         });
     });
 </script>

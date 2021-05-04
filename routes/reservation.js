@@ -8,6 +8,30 @@ const Op = sequelize.Op;
 
 const router = express.Router();
 
+router.get('/cancle', async (req, res, next) => {
+    const reservationId = req.query.reservationId;
+    console.log(reservationId);
+    try {
+        const exUser = await Reservation.findOne({
+            where: {id: reservationId}
+        });
+        
+        if(exUser.UserId === req.user.id) {
+            await Reservation.destroy({
+                where: {
+                    id: reservationId,
+                },
+            });
+            res.json({success: true, message: "예약이 취소되었습니다."});
+        } else {
+            res.json({success: false, message: "해당 예약을 취소할수 없습니다."});
+        }
+    } catch(error) {
+        console.log(error);
+        next(error);
+    }
+});
+
 // 예약 페이지
 router.get('/:hostId', isLoggedIn, async (req, res, next) => {
     try {
@@ -29,7 +53,7 @@ router.get('/:hostId', isLoggedIn, async (req, res, next) => {
 router.post('/reservationChecking/:hostId', async (req, res, next) => {
     const checkInDate = dateFormat(new Date(req.body.checkin), "yyyy-mm-dd");
     const checkOutDate = dateFormat(new Date(req.body.checkout), "yyyy-mm-dd");
-    
+    console.log(req.body.checkin);
     try {
         const exReservation = await Reservation.findOne({
             where: { 
@@ -86,5 +110,7 @@ router.post('/:hostId', isLoggedIn, async (req, res, next) => {
         next(error);
     }
 });
+
+//취소하기
 
 module.exports = router;

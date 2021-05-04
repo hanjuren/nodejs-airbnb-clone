@@ -5,7 +5,7 @@ const User = require('../models/user');
 module.exports = () => {
     passport.use(new KakaoStrategy({
         clientID: process.env.KAKAO_ID, // 카카오 시크릿키
-        callbackURL: "http://localhost:1210/auth/kakao/callback", // 카카오 콜백 URL
+        callbackURL: "http://localhost:8640/auth/kakao/callback", // 카카오 콜백 URL
     }, async (accessToken, refreshToken, profile, done) => {
         try {
             const exUser = await User.findOne({

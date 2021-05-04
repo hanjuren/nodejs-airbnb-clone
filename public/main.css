@@ -415,6 +415,10 @@
     margin: 15px 0 0 90px;
     border-bottom: 2px solid lightgray;
 }
+.not__reservation {
+    width: 50%;
+    margin: 15px 0 0 90px;
+}
 
 .myReservation__info {
     width: 50%;
@@ -437,10 +441,27 @@
 }
 
 .myReservation__HostInfo {
-    width: 80%;
+    width: 95%;
     margin: 10px 0 0 15px;
     padding-bottom: 10px;
     border-bottom: 1px solid lightgray;
+}
+.Hostinfo__top {
+    display: flex;
+    justify-content: space-between;
+}
+#reservation-cancle {
+    background-color: #f5a6a6;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 8px;
+    outline: none;
+    cursor: pointer;
+}
+#reservation-cancle:hover {
+    color: black;
+    font-weight: 700;
 }
 .myReservation__HostInfo img {
     width: 300px;
