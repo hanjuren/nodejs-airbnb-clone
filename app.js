@@ -18,6 +18,7 @@ const postRouter = require('./routes/post');
 const reviewRouter = require('./routes/review');
 const hostRouter = require('./routes/host');
 const reservationRouter = require('./routes/reservation');
+const favoritesRouter = require('./routes/favorites');
 //시퀄라이즈 불러오기
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
@@ -74,6 +75,7 @@ app.use('/post', postRouter);
 app.use('/review', reviewRouter);
 app.use('/host', hostRouter);
 app.use('/reservation', reservationRouter);
+app.use('/favorites', favoritesRouter);
 
 app.use( (req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

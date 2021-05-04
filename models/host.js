@@ -60,5 +60,6 @@ module.exports = class Host extends Sequelize.Model{
         db.Host.belongsTo(db.User);
         db.Host.hasMany(db.Reservation);
         db.Host.hasMany(db.Review);
+        db.Host.hasMany(db.Favorite);
     }
 };

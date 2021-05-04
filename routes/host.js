@@ -137,8 +137,7 @@ router.get('/city', async (req, res, next) => {
             } else {
                 city = "전체"
             }
-            console.log(hosts);
-            console.log(count);
+
             res.render('hosts', {hosts, count, city});
         }
         
@@ -178,7 +177,7 @@ router.get('/:hostid', async (req, res, next) => {
             ],
         });
         res.render('hostinfo', {host});
-        console.log(host);
+
     }catch (error) {
         console.error(error);
         next(error);

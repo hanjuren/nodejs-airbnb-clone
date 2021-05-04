@@ -162,6 +162,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    padding-bottom: 20px;
 }
 #hostinfo__middletitle {
     display: flex;
@@ -171,9 +172,27 @@
 #middletitle__city{
 
 }
-#middletitle__save {
-
+#middletitle__like i{
+    color: red;
+    font-size: 25px;
+    font-weight: 300;
 }
+#middletitle__like i:hover {
+    color: #ff7777;
+    font-weight: 600;
+}
+
+#middletitle__unlike i{
+    color: red;
+    font-size: 25px;
+    font-weight: 600;
+}
+#middletitle__unlike i:hover {
+    color: red;
+    font-weight: 300;
+}
+
+
 .hostinfo__Image {
     width: 100%;
     display: grid;

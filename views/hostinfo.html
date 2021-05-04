@@ -12,9 +12,15 @@
                 <div id="middletitle__city">
                     <p>{{host.city}}</p>
                 </div>
-                <div id="middletitle__save">
-                    <p>저장</p>
+                {% if not favoritesList.includes( host.id ) %}
+                <div id="middletitle__like">
+                    <a href="#" id="likeBtn"><i class="far fa-heart" id="like"></i></a>
                 </div>
+                {% else %}
+                <div id="middletitle__unlike">
+                    <a href="#" id="unlikeBtn"><i class="far fa-heart" id="unlike"></i></a>
+                </div>
+                {% endif %}
             </div>
         </div>
 
@@ -151,6 +157,22 @@
             .catch((error) => {
                 console.error(error);
                 return alert(error);
+            });
+    });
+
+    document.getElementById('likeBtn').addEventListener('click', function () {
+        axios.put(`/favorites/add/{{host.id}}`, {})
+            .then((response) => {
+                if (response.data.success) {
+                    alert(response.data.message);
+                    return location.reload();
+                } else {
+                    alert(response.data.message);
+                    return location.reload();
+                }
+            })
+            .catch((error) => {
+                return alert(errro);
             });
     });
 

@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.use((req, res, next) => {
     res.locals.user = req.user;
+    res.locals.favoritesList = req.user ? req.user.Favorites.map(f => f.HostId) : [];
     next();
   });
 

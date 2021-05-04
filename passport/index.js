@@ -4,7 +4,7 @@ const kakao = require('./KakaoStrategy');
 const facebook = require('./facebookStrategy');
 const naver = require('./naverStrategy');
 
-const User= require('../models/user');
+const {User, Favorite} = require('../models');
 
 module.exports = () => {
     // 로그인시 실행
@@ -18,12 +18,16 @@ module.exports = () => {
     passport.deserializeUser((id, done) => {
         User.findOne({ 
             where: {id},
+            include: {
+                model: Favorite,
+                attributes: ['HostId'],
+            },
         })
             .then(user => done(null, user))
             .catch(err => done(err));
     });
     
-
+    
     local();
     kakao();
     facebook();

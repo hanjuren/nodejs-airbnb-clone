@@ -6,6 +6,7 @@ const Host = require('./host');
 const Image = require('./image');
 const Review = require('./review');
 const Reservation = require('./reservation');
+const Favorite = require('./favorite');
 
 const db = {};
 const sequelize = new Sequelize(
@@ -18,17 +19,20 @@ db.Host = Host;
 db.Image = Image;
 db.Reservation = Reservation;
 db.Review = Review;
+db.Favorite = Favorite;
 
 User.init(sequelize);
 Host.init(sequelize);
 Image.init(sequelize);
 Reservation.init(sequelize);
 Review.init(sequelize);
+Favorite.init(sequelize);
 
 User.associate(db);
 Host.associate(db);
 Image.associate(db);
 Reservation.associate(db);
 Review.associate(db);
+Favorite.associate(db);
 
 module.exports = db;

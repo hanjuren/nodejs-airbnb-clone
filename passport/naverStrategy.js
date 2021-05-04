@@ -7,7 +7,7 @@ module.exports = () => {
     passport.use(new NaverStrategy ({
         clientID: process.env.NAVER_ID, // 네이버에서 발급받을 ID
         clientSecret: process.env.NAVER_SECRET,
-        callbackURL: "http://localhost:1210/auth/naver/callback", // 네이버로부터 인증결과를 받을 라우터 주소
+        callbackURL: "http://localhost:8640/auth/naver/callback", // 네이버로부터 인증결과를 받을 라우터 주소
     }, async (accessToken, refreshRoken, profile, done) => {  // 네[이버에서 인증 후 Token 과 profile을 보내준다.
         console.log('naver profile', profile);
         try {
