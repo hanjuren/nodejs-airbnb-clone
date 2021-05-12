@@ -26,4 +26,19 @@ router.put('/add/:hostId', isLoggedIn, async (req, res, next) => {
     }
 });
 
+router.delete('/delete/:hostId', isLoggedIn ,async (req, res, next) => {
+    try {
+        await Favorite.destroy({
+            where: {
+                UserId: req.user.id,
+                HostId: req.params.hostId,
+            }
+        });
+        res.json({success: true, message: '즐겨찾기 삭제 완료'});
+    } catch(error) {
+        console.log(error);
+        next(error);
+    }
+});
+
 module.exports = router;
