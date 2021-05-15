@@ -63,6 +63,7 @@ router.get('/city', async (req, res, next) => {
             city = req.query.city;
             
             res.render('hosts', {hosts, count, city, category});
+            
         }
         // 전체 도시의 카테고리별
         else if(req.query.category) {
@@ -138,7 +139,8 @@ router.get('/city', async (req, res, next) => {
                 city = "전체"
             }
 
-            res.render('hosts', {hosts, count, city});
+            //res.render('hosts', {hosts, count, city});
+            res.json({hosts});
         }
         
     } catch (error) {
@@ -176,8 +178,8 @@ router.get('/:hostid', async (req, res, next) => {
                 },  
             ],
         });
-        res.render('hostinfo', {host});
-
+        //res.render('hostinfo', {host});
+        res.json({data: host});
     }catch (error) {
         console.error(error);
         next(error);

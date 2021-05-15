@@ -2,110 +2,110 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/layout.css">
-    <link rel="stylesheet" href="/main.css">
-    <link rel="stylesheet" href="/join.css">
-    <link rel="stylesheet" href="/login.css">
-    <link rel="stylesheet" href="/host.css">
-    <link rel="stylesheet" href="/hosts.css">
-    <link rel="stylesheet" href="/review.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/layout.css">
+  <link rel="stylesheet" href="/main.css">
+  <link rel="stylesheet" href="/join.css">
+  <link rel="stylesheet" href="/login.css">
+  <link rel="stylesheet" href="/host.css">
+  <link rel="stylesheet" href="/hosts.css">
+  <link rel="stylesheet" href="/review.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-    <title>에어비앤비 클론코딩</title>
+  <title>에어비앤비 클론코딩</title>
 </head>
 
 <body>
-    <div class='header'>
-        <a href="/"><img class="header__icon"
-                src="https://i.pinimg.com/564x/04/57/14/0457144332ce38550077355621165d24.jpg" alt="" /></a>
+  <div class='header'>
+    <a href="/"><img class="header__icon" src="https://i.pinimg.com/564x/04/57/14/0457144332ce38550077355621165d24.jpg"
+        alt="" /></a>
 
-        <form id="search-form" action="/host/city">
-            <div class="header__center">
-                <input type="text" name="city" placeholder="여행지 검색을 통해 빠른 예약을 해보세요" />
-                <button type="submit" id="search-btn"><i class="fas fa-search"></i></button>
-            </div>
-        </form>
-        <div class="header__right">
-            {% if user and user.id and user.hostAvailability === true %}
-            <a href="/host">
-                <p>호스팅 시작</p>
-            </a>
-            {% elif user and user.id and user.hostAvailability === false %}
-            <a href="/host/apply">
-                <p>호스트 신청</p>
-            </a>
-            {% else %}
-            <a href="/host/apply">
-                <p>호스트 되기</p>
-            </a>
-            {% endif %}
-            <div class="auth">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-user-circle"></i>
-            </div>
-        </div>
+    <form id="search-form" action="/host/city">
+      <div class="header__center">
+        <input type="text" name="city" placeholder="여행지 검색을 통해 빠른 예약을 해보세요" />
+        <button type="submit" id="search-btn"><i class="fas fa-search"></i></button>
+      </div>
+    </form>
+    <div class="header__right">
+      {% if user and user.id and user.hostAvailability === true %}
+      <a href="/host">
+        <p>호스팅 시작</p>
+      </a>
+      {% elif user and user.id and user.hostAvailability === false %}
+      <a href="/host/apply">
+        <p>호스트 신청</p>
+      </a>
+      {% else %}
+      <a href="/host/apply">
+        <p>호스트 되기</p>
+      </a>
+      {% endif %}
+      <div class="auth">
+        <i class="fas fa-bars"></i>
+        <i class="fas fa-user-circle"></i>
+      </div>
     </div>
+  </div>
 
-    <div class="auth__info">
-        {% if user and user.id %}
-        <a href="/userinfo">
-            <div class="auth__info__link" id="join__link">내정보</div>
-        </a>
-        <a href="/logout">
-            <div class="auth__info__link">로그아웃</div>
-        </a>
-        {% else %}
-        <a href="/join">
-            <div class="auth__info__link" id="join__link">회원가입</div>
-        </a>
-        <a href="/login">
-            <div class="auth__info__link">로그인</div>
-        </a>
-        <div class="auth__info__link">호스트 되기</div>
-        {% endif %}
-    </div>
-
-
-
-    {% block main %}
-    {% endblock %}
-
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-
-        window.onload = function () {
-            const openInfo = () => {
-                const authInfo = document.querySelector('.auth');
-                document.querySelector('.auth__info').style.display = "block";
-                authInfo.removeEventListener('click', openInfo);
-                authInfo.addEventListener('click', closeInfo);
-            };
-            const closeInfo = () => {
-                const authInfo = document.querySelector('.auth');
-                document.querySelector('.auth__info').style.display = "none";
-                authInfo.removeEventListener('click', closeInfo);
-                authInfo.addEventListener('click', openInfo);
-            };
-            const authInfo = document.querySelector('.auth').addEventListener('click', openInfo);
-        }
+  <div class="auth__info">
+    {% if user and user.id %}
+    <a href="/userinfo">
+      <div class="auth__info__link" id="join__link">내정보</div>
+    </a>
+    <a href="/logout">
+      <div class="auth__info__link">로그아웃</div>
+    </a>
+    {% else %}
+    <a href="/join">
+      <div class="auth__info__link" id="join__link">회원가입</div>
+    </a>
+    <a href="/login">
+      <div class="auth__info__link">로그인</div>
+    </a>
+    <div class="auth__info__link">호스트 되기</div>
+    {% endif %}
+  </div>
 
 
 
-    </script>
-    {% block script %}
+  {% block main %}
+  {% endblock %}
 
-    {%endblock%}
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+
+    window.onload = function () {
+      const openInfo = () => {
+        const authInfo = document.querySelector('.auth');
+        document.querySelector('.auth__info').style.display = "block";
+        authInfo.removeEventListener('click', openInfo);
+        authInfo.addEventListener('click', closeInfo);
+      };
+      const closeInfo = () => {
+        const authInfo = document.querySelector('.auth');
+        document.querySelector('.auth__info').style.display = "none";
+        authInfo.removeEventListener('click', closeInfo);
+        authInfo.addEventListener('click', openInfo);
+      };
+      const authInfo = document.querySelector('.auth').addEventListener('click', openInfo);
+    }
+
+
+
+  </script>
+  {% block script %}
+
+  {%endblock%}
 </body>
 
 </html>

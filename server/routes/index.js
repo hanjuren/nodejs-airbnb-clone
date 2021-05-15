@@ -73,7 +73,8 @@ router.get('/userinfo', isLoggedIn, async (req, res, next) => {
             ],
             order: [['id', 'DESC']],
         });
-        res.render('userinfo', {title: "내정보", UserReservation, ReservationSuccess});
+        //res.render('userinfo', {title: "내정보", UserReservation, ReservationSuccess});
+        res.json({UserReservation});
     } catch(error) {
         console.error(error);
         next(error);

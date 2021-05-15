@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const session = require('express-session');
 const MysqlStore = require('express-mysql-session')(session);
 const cookieParser = require('cookie-parser');
@@ -7,6 +8,7 @@ const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 const path = require('path');
 const passport = require('passport');
+
 
 
 dotenv.config();
@@ -24,6 +26,8 @@ const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 
 const app = express();
+app.use(cors());
+
 passportConfig();
 app.set('port', process.env.PORT || 8640);
 app.set('view engine', 'html');
