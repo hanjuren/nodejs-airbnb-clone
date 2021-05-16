@@ -12,15 +12,16 @@ const HostGrid = () => {
     fetch(`http://localhost:8640/host/city?city=${city.city}`)
       .then(response => response.json())
       .then((response) => {
-        console.log(response.hosts);
-        return setHosts([response.hosts]);
+        return setHosts(response.hosts);
       })
   },[location]);
-
+  
   return (
     <>
-    
-      <h1>{}</h1>
+    {hosts && hosts.map((hosts) => (
+      <h1>{hosts.title}</h1>
+    ))}
+      <h1>fjsdlkaf</h1>
     </>
   );
 };

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import HostGrid from '../hosts/HostGrid';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import {FaSearch} from 'react-icons/fa';
@@ -71,7 +70,7 @@ const Header = () => {
           <div>
               <input type="text" placeholder="여행지 검색을 통해 빠른 예약을 해보세요" value={searchValue} onChange={searchCity}/>
               <Link onClick={search} to={`/hosts?city=${searchValue}`}>
-                <button ><FaSearch/></button>
+                <button><FaSearch/></button>
               </Link>
           </div>
       

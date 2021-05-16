@@ -3,12 +3,6 @@ import React from 'react';
 const Main = () => {
   return (
     <>
-    <div className="banner">
-      <div className="banner__info">
-          <h3>호스트 여러분이 있기에 가능합니다.</h3>
-      </div>
-    </div>
-
     <div className="city__place">
       <section>도시별 여행지 둘러보기</section>
         <div className="city__info">

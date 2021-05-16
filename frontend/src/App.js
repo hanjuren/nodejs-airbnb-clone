@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import Header from './components/header/Header';
-import Main from './components/main/Main';
-import HostGrid from './components/hosts/HostGrid';
+import MainPage from  './pages/MainPage';
+import HostGrid from './pages/HostGrid';
 
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
       <Header />          
           <Switch>
-            <Route exact path={"/"} component={Main} />
+            <Route exact path={"/"} component={MainPage} />
             <Route path='/hosts' component={HostGrid} />
           </Switch>
       </BrowserRouter>
