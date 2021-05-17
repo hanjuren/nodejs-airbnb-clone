@@ -20,7 +20,7 @@
   border-radius: .3rem;
   background-color: #fff;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
-  animation: modal-show .3s;
+  animation: modal-show .1s;
   overflow: hidden;
 }
 .modal > section > header {
@@ -31,7 +31,7 @@
 }
 .modal > section > header button {
   position: absolute;
-  top: 15px;
+  top: 5px;
   right: 15px;
   width: 30px;
   font-size: 21px;

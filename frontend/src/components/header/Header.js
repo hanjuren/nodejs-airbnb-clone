@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Modal from '../modal/Modal';
+import ModalType from '../modal/ModalType';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import {FaSearch} from 'react-icons/fa';
+import {FaSearch,FaUserAlt,FaBars} from 'react-icons/fa';
 
 // 스타일 컴포넌트
 const Headers = styled.div`
@@ -21,7 +22,7 @@ const Headers = styled.div`
     margin-left: 80px;
   }
 
-  div{
+  .search-formdiv {
     display: flex;
     flex: 1;
     align-items: center;
@@ -32,15 +33,14 @@ const Headers = styled.div`
     border-radius: 999px;
   }
 
-  form {
+  .search-form {
     width: 400px;
-    margin-left: 100px;
-
     button {
       border: none;
       background-color: white;
       outline: none;
       cursor: pointer;
+      margin-right: 10px;
     }
     input {
       border: none;
@@ -51,6 +51,33 @@ const Headers = styled.div`
     }
   }
 `;
+
+const HeaderRight = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100px;
+  margin-right: 20px;
+`;
+
+const AuthButton = styled.div`
+  border: 1px solid lightgray;
+  border-radius: 999px;
+  width: 60px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+
+  .auth_i {
+    font-size: 20px;
+    color: gray;
+  }
+  .auth_i:first-child{
+    font-size: 15px;
+}
+`;
+
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -66,10 +93,7 @@ const Header = () => {
 
 
   const openModal = () => {
-      setModalOpen(true);
-  }
-  const closeModal = () => {
-      setModalOpen(false);
+      setModalOpen(!modalOpen);
   }
 
   return (
@@ -78,23 +102,27 @@ const Header = () => {
         <a href="/">
           <img src="https://i.pinimg.com/564x/04/57/14/0457144332ce38550077355621165d24.jpg" alt=""/>
         </a>
-        <form>
-          <div>
+        <form className="search-form">
+          <div className="search-formdiv">
               <input type="text" placeholder="여행지 검색을 통해 빠른 예약을 해보세요" value={searchValue} onChange={searchCity}/>
               <Link onClick={search} to={`/hosts?city=${searchValue}`}>
                 <button><FaSearch/></button>
               </Link>
           </div>
         </form>
-        <button onClick={ openModal }>모달팝업</button>
+        <HeaderRight>
+          <AuthButton onClick={ openModal }>
+            <FaUserAlt className="auth_i"/>
+            <FaBars className="auth_i"/>
+          </AuthButton>
+        </HeaderRight>
       </Headers>
+      
       {modalOpen && 
-          <Modal open={ modalOpen } close={ closeModal } header="Modal heading">
-          리액트 함수형 모달 팝업창입니다.
-          쉽게 만들 수 있어요. 
-          같이 만들어봐요!
-        </Modal>
-        }
+        <ModalType open={ modalOpen } close={ openModal } header="Modal heading">
+        </ModalType>
+      }
+
     </>
   );
 };
