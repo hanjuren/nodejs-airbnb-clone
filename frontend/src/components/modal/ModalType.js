@@ -28,9 +28,11 @@ const AuthInfoLink = styled.div`
 const ModalType = (props) => {
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [openState, setOpenState] = useState(props.open);
+  const [checkType, setCheckType] = useState('');
   const { close, header } = props;
 
-  const authModal = () => {
+  const authModal = (checkType) => {
+    setCheckType(checkType);
     setOpenState(!openState);
     setAuthModalOpen(!authModalOpen);
   };
@@ -43,13 +45,13 @@ const ModalType = (props) => {
     <>
     { openState ? (
       <AuthInfo className={ openState ? 'openModal modal' : 'modal' }>
-        <AuthInfoLink onClick={authModal}>로그인</AuthInfoLink>
-        <AuthInfoLink>회원가입</AuthInfoLink>
+        <AuthInfoLink onClick={authModal.bind(this, 'login')}>로그인</AuthInfoLink>
+        <AuthInfoLink onClick={authModal.bind(this, 'register')}>회원가입</AuthInfoLink>
       </AuthInfo>
     ) : null }
 
     {authModalOpen &&  
-      <Modal open={authModalOpen} close={closeAuthModal}></Modal>
+      <Modal open={authModalOpen} close={closeAuthModal} type={checkType}></Modal>
     }
     </>
   );
