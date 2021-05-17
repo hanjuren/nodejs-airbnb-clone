@@ -1,8 +1,10 @@
 import React from 'react';
+import './App.css';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import Header from './components/header/Header';
 import MainPage from  './pages/MainPage';
 import HostGrid from './pages/HostGrid';
+
 
 
 function App() {

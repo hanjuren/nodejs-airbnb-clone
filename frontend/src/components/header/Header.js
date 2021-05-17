@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Modal from '../modal/Modal';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import {FaSearch} from 'react-icons/fa';
@@ -53,6 +54,7 @@ const Headers = styled.div`
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState('');
+  const [ modalOpen, setModalOpen ] = useState(false);
   const history = useHistory();
 
   const searchCity = (e) => {
@@ -61,7 +63,17 @@ const Header = () => {
   const search = () => {
     setSearchValue('');
   }
+
+
+  const openModal = () => {
+      setModalOpen(true);
+  }
+  const closeModal = () => {
+      setModalOpen(false);
+  }
+
   return (
+    <>
       <Headers>
         <a href="/">
           <img src="https://i.pinimg.com/564x/04/57/14/0457144332ce38550077355621165d24.jpg" alt=""/>
@@ -73,9 +85,17 @@ const Header = () => {
                 <button><FaSearch/></button>
               </Link>
           </div>
-      
         </form>
+        <button onClick={ openModal }>모달팝업</button>
       </Headers>
+      {modalOpen && 
+          <Modal open={ modalOpen } close={ closeModal } header="Modal heading">
+          리액트 함수형 모달 팝업창입니다.
+          쉽게 만들 수 있어요. 
+          같이 만들어봐요!
+        </Modal>
+        }
+    </>
   );
 };
 
