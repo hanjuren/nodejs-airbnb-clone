@@ -5,17 +5,22 @@ import "./modal.css";
 
 const Modal = (props) => {
 
-  const { open, close } = props;
+  const [openState, setOpenState] = useState(props.open);
+  const { close } = props;
   const [renderType, setRenderType] = useState(props.type);
   
+  const modalClose = () => {
+    setOpenState(!openState);
+    close();
+  }
 
   const pageChange = () => {
     setRenderType(renderType === "login" ? "register" : "login" );
   };
   
   return (
-    <div className={ open ? 'openModal modal' : 'modal' }>
-      { open ? ( 
+    <div className={ openState ? 'openModal modal' : 'modal' }>
+      { openState ? ( 
         <section>
           <header>
             <p>로그인 또는 회원가입</p> 
@@ -23,7 +28,7 @@ const Modal = (props) => {
           </header>
           <main>
             {renderType === 'login' ?
-               <Login type={renderType} change={pageChange}/> : 
+               <Login type={renderType} change={pageChange} close={modalClose}/> : 
                <Register type={renderType} change={pageChange}/>
             }
             

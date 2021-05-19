@@ -11,13 +11,22 @@ const Buttoncss = css`
   width: 70%;
   border: 1px solid lightgray;
   font-size: 16px;
-  font-weight: 600;
-  color: white;
+  font-weight: 800;
+  color: black;
   cursor: pointer;
   outline: none;
   p {
     margin-left: 10px
   }
+  :hover {
+    background-color: #FF1493;
+    transition: background-color 1000ms linear;
+  }
+`;
+
+const ExButton = styled.button`
+  background-color: #ff7777;
+  ${Buttoncss};
 `;
 
 const Kakao = styled.button`
@@ -37,15 +46,28 @@ const Naver = styled.button`
   }
 `;
 
+const Change = styled.button`
+background-color: white;
+border: 1px solid black;
+outline: none;
+padding: 5px;
+font-weight: 800;
+:hover {
+  border-bottom: 1px solid #FF1493;
+  transition: border-bottom 1000ms linear;
+}
+`;
+
 const style = { color: "white", fontSize: "1.4em" };
 
-const Button = ({type}) => {
+const Button = ({type, text, click, event}) => {
+  
   if (type === 'kakao') {
     return (
       <>
         <Kakao>
           <RiKakaoTalkFill className="IconButton" style={style}/>
-          <p>카카오 로그인</p>
+          <p>{text}</p>
         </Kakao>
       </>
     );
@@ -54,7 +76,7 @@ const Button = ({type}) => {
       <>
         <Facebook>
           <RiFacebookCircleFill className="IconButton" style={style}/>
-          <p>페이스북 로그인</p>
+          <p>{text}</p>
         </Facebook>
       </>
     );
@@ -63,12 +85,26 @@ const Button = ({type}) => {
       <>
         <Naver>
           <img src="./naver-icon-style.png" className="IconButton"/>
-          <p>네이버 로그인</p>
+          <p>{text}</p>
         </Naver>
       </>
     );
+  } else if (type === "local") {
+    return (
+      <>
+      <ExButton onClick={event}>
+        <p>{text}</p>
+      </ExButton>
+      </>
+    );
   } else {
-    return null;
+    return (
+      <>
+        <Change onClick={click}>
+          <p>{text}</p>
+        </Change>
+      </>
+    );
   }
 };
 

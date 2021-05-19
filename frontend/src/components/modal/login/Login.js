@@ -1,50 +1,38 @@
 import React, { useState } from 'react';
+import AuthLogin from '../../../logic/auth/AuthLogin';
 import Button from '../../../common/button/Button';
+import Input from '../../../common/input/Input';
 import styled from 'styled-components';
+import {Link, Redirect} from 'react-router-dom';
 
 
 const LoginContainer = styled.div`
   width: 100%;
+  height: 550px;
   display: flex;
+  flex-direction: column;
+  justify-items: center;
+  
   position: relative;
   h3 {
     margin-bottom: 15px;
   }
 `;
 const Form = styled.form`
-  width: 100%;
+width: 100%;
+  
 `;
 const Loginform = styled.div`
+
   display: flex;
   align-items: center;
   flex-direction: column;
-`;
-const Input = styled.input`
-  width: 90% !important;
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid lightgray;
-  outline: none;
-  margin-bottom: 20px;
-  font-size: 17px;
-`;
-const LoginButton = styled.button`
-  border-radius: 10px;
-  padding: 10px;
-  margin-top: 10px;
-  width: 70%;
-  border: 1px solid lightgray;
-  background-color: #ff7777;
-  font-size: 16px;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
-  outline: none;
+  
 `;
 
-const SocialLogin = styled.div`
+export const SocialLogin = styled.div`
   width: 100%;
-  margin-top: 10px;
+  margin-top: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,33 +40,78 @@ const SocialLogin = styled.div`
 `;
 
 const Login = (props) => {
-  const [changePage, setChangePage] = useState(props.type)
+  const { change, close } = props;
+  const [success, setSuccess] = useState('');
+
+  const [userState, setUserState] = useState({
+    email: "",
+    password: "",
+  });
+
+  const email = (e) => {
+    setUserState({
+      ...userState,
+      email: e.target.value
+    });
+  };
+  const password = (e) => {
+    setUserState({
+      ...userState,
+      password: e.target.value
+    });
+  };
+ 
+  const resetValue = (e) => {
+    e.preventDefault();
+    const data = AuthLogin(userState);
+    console.log(data);
+    const {email, password} = userState;
+
+    // fetch('http://localhost:8640/auth/login', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     'email': email,
+    //     'password': password 
+    //   })
+    // })
+    //   .then(response => response.json())
+    //   .then((response) => {
+    //     setSuccess(response.loginsuccess);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    // return console.log(success);
+  };
   
-  const { change } = props;
 
   return (
     <>
     <LoginContainer>
-      <Form>
+       
       <h3>에어비앤비에 오신 것을 환영합니다.</h3>
-        <Loginform>
-          <Input type="text" name="email" placeholder="이메일을 입력해주세요"/>
-          <Input type="password" name="password" placeholder="비밀번호를 입력해주세요"/>
-          <LoginButton>로그인하기</LoginButton>
-        </Loginform>
+      <Form>
+      <Loginform>
+        <Input type="text" name="email" placeholder="이메일 입력해주세요" value={userState.email} event={email}/>
+        <Input type="password" name="password" placeholder="비밀번호를 입력해주세요" value={userState.password} event={password}/>
+      <Button type="local" text="로그인하기" event={resetValue}/>
+      </Loginform>
+
       </Form>
 
-    </LoginContainer>
-    <SocialLogin>
-      <Button type="kakao" />
-      <Button type="facebook" />
-      <Button type="naver" />
-    </SocialLogin>
-    
-    
-    <button onClick={change}>회원가입</button>
-    
+      <SocialLogin>
+        <Button type="kakao" text="카카오 로그인"/>
+        <Button type="facebook" text="페이스북 로그인"/>
+        <Button type="naver" text="네이버 로그인"/>
+      </SocialLogin>
 
+    </LoginContainer>
+    
+    <Button type="page" text="회원가입" click={change}/>
     </>
   );
 };
