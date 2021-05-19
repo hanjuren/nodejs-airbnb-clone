@@ -18,10 +18,10 @@ const HostGrid = () => {
   
   return (
     <>
+    <h1>fjsdlkaf</h1>
     {hosts && hosts.map((hosts) => (
       <h1>{hosts.title}</h1>
     ))}
-      <h1>fjsdlkaf</h1>
     </>
   );
 };

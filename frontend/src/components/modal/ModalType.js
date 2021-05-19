@@ -27,9 +27,10 @@ const AuthInfoLink = styled.div`
 
 const ModalType = (props) => {
   const [authModalOpen, setAuthModalOpen] = useState(false);
+  
   const [openState, setOpenState] = useState(props.open);
   const [checkType, setCheckType] = useState('');
-  const { close, header } = props;
+  const { open, close } = props;
 
   const authModal = (checkType) => {
     setCheckType(checkType);
@@ -39,6 +40,7 @@ const ModalType = (props) => {
 
   const closeAuthModal = () => {
     setAuthModalOpen(!authModalOpen);
+    close();
   }
   
   return (

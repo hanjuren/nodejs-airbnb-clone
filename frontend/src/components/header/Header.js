@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Modal from '../modal/Modal';
 import ModalType from '../modal/ModalType';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
@@ -119,7 +118,7 @@ const Header = () => {
       </Headers>
       
       {modalOpen && 
-        <ModalType open={ modalOpen } close={ openModal } header="Modal heading">
+        <ModalType open={ modalOpen } close={ openModal }>
         </ModalType>
       }
 

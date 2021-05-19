@@ -8,7 +8,7 @@ const Register = (props) => {
   
   return (
     <div>
-      fjsdlfjsalk
+      
       <button onClick={change}>회원가입</button>
     </div>
   );

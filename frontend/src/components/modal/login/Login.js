@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from '../button/Button';
+import Button from '../../../common/button/Button';
 import styled from 'styled-components';
 
 
