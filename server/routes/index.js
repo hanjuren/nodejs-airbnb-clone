@@ -8,7 +8,7 @@ const { Host, Reservation, Image, Review } = require('../models');
 const router = express.Router();
 
 router.use((req, res, next) => {
-    res.locals.user = req.user;
+    console.log(req.user);    res.locals.user = req.user;
     res.locals.favoritesList = req.user ? req.user.Favorites.map(f => f.HostId) : [];
     next();
   });
@@ -84,7 +84,7 @@ router.get('/userinfo', isLoggedIn, async (req, res, next) => {
 router.get('/logout', isLoggedIn, (req, res) => {
     req.logout();
     req.session.destroy();
-    res.redirect('/');
+    res.json({success: true});
 });
 
 

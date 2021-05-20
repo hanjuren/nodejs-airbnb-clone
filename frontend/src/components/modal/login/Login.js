@@ -3,7 +3,7 @@ import AuthLogin from '../../../logic/auth/AuthLogin';
 import Button from '../../../common/button/Button';
 import Input from '../../../common/input/Input';
 import styled from 'styled-components';
-import {Link, Redirect} from 'react-router-dom';
+import { userContext } from '../../../App';
 
 
 const LoginContainer = styled.div`
@@ -40,52 +40,38 @@ export const SocialLogin = styled.div`
 `;
 
 const Login = (props) => {
+  const store = React.useContext(userContext);
+  
   const { change, close } = props;
   const [success, setSuccess] = useState('');
 
-  const [userState, setUserState] = useState({
-    email: "",
-    password: "",
-  });
+  const [emailState, setEmail] = useState('');
+  const [passwordState, setPassword] = useState('');
 
   const email = (e) => {
-    setUserState({
-      ...userState,
-      email: e.target.value
-    });
+    setEmail(e.target.value);
   };
   const password = (e) => {
-    setUserState({
-      ...userState,
-      password: e.target.value
-    });
+    setPassword(e.target.value);
   };
  
-  const resetValue = (e) => {
-    e.preventDefault();
-    const data = AuthLogin(userState);
-    console.log(data);
-    const {email, password} = userState;
-
-    // fetch('http://localhost:8640/auth/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     'email': email,
-    //     'password': password 
-    //   })
-    // })
-    //   .then(response => response.json())
-    //   .then((response) => {
-    //     setSuccess(response.loginsuccess);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    // return console.log(success);
+  const resetValue = async (e) => {
+    try {
+      e.preventDefault();
+      const data = await AuthLogin(emailState, passwordState);
+      if(data) {
+        window.localStorage.setItem('id', data.id);
+        window.localStorage.setItem('email', data.email);
+        store.setLogin(true);
+        close();
+      } else {
+        console.log("로그인 실패");
+        setEmail('');
+        setPassword('');
+      }
+    } catch (error) {
+      window.alert(error);
+    }
   };
   
 
@@ -96,9 +82,9 @@ const Login = (props) => {
       <h3>에어비앤비에 오신 것을 환영합니다.</h3>
       <Form>
       <Loginform>
-        <Input type="text" name="email" placeholder="이메일 입력해주세요" value={userState.email} event={email}/>
-        <Input type="password" name="password" placeholder="비밀번호를 입력해주세요" value={userState.password} event={password}/>
-      <Button type="local" text="로그인하기" event={resetValue}/>
+        <Input type="text" name="email" placeholder="이메일 입력해주세요" value={emailState} event={email}/>
+        <Input type="password" name="password" placeholder="비밀번호를 입력해주세요" value={passwordState} event={password}/>
+        <Button type="local" text="로그인하기" event={resetValue}/>
       </Loginform>
 
       </Form>

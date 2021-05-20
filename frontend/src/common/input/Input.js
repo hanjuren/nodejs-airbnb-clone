@@ -52,7 +52,7 @@ const Input = (props) => {
   else {
     return (
       <>
-        <InputCommons type={type} name={name} placeholder={placeholder} defaultValue={value} onChange={event}/>
+        <InputCommons type={type} name={name} placeholder={placeholder} value={value}  onChange={event}/>
       </>
     );
   }

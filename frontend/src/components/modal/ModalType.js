@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import {userContext} from '../../App';
 import Modal from './Modal';
 import "./modal.css";
 import styled from "styled-components";
+import Logout from '../../logic/auth/AuthLogout';
+import { Link } from 'react-router-dom';
 
 const AuthInfo = styled.div`
   position: fixed;
@@ -20,12 +23,20 @@ const AuthInfo = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
   display: none;
+  a {
+    outline: none;
+    text-decoration: none;
+    color: black;
+  }
 `;
 const AuthInfoLink = styled.div`
   padding: 15px;
+  cursor: pointer;
 `;
 
 const ModalType = (props) => {
+  const store = React.useContext(userContext);
+  console.log(store)
   const [authModalOpen, setAuthModalOpen] = useState(false);
   
   const [openState, setOpenState] = useState(props.open);
@@ -42,7 +53,14 @@ const ModalType = (props) => {
     setAuthModalOpen(!authModalOpen);
     close();
   }
+  const logout = async () => {
+    await Logout();
+    window.localStorage.clear();
+    store.setLogin(false);
+    close();
+  }
   
+if(!store.login) {
   return (
     <>
     { openState ? (
@@ -57,6 +75,28 @@ const ModalType = (props) => {
     }
     </>
   );
+} else {
+  return (
+    <>
+    { openState ? (
+      <AuthInfo className={ openState ? 'openModal modal' : 'modal' }>
+        <Link onClick={logout} to={"/"}>
+          <AuthInfoLink>로그아웃</AuthInfoLink>
+        </Link>
+        <Link onClick={close} to={"/userinfo"}>
+          <AuthInfoLink>내정보</AuthInfoLink>
+        </Link>
+      </AuthInfo>
+    ) : null }
+
+    {authModalOpen &&  
+      <Modal open={authModalOpen} close={closeAuthModal} type={checkType}></Modal>
+    }
+    </>
+  );
+}
+    
+  
 };
 
 export default ModalType;
