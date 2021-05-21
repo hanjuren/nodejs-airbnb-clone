@@ -38,7 +38,7 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
     }
 });
 
-router.post('/login', isNotLoggedIn, async(req, res, next) => {
+router.post('/login', async(req, res, next) => {
     passport.authenticate('local', (authError, user, info) => {
         if (authError) { // 서버 에러일경우
             console.error(authError);
@@ -52,42 +52,41 @@ router.post('/login', isNotLoggedIn, async(req, res, next) => {
                 console.log(loginError);
                 return next(loginError);
             }
-            console.log(user);
-            return res.json({loginsuccess: true, message: "로그인 성공!!.", user});
+            
+            return res.json({loginsuccess: true});
         });
     })(req, res, next); // 미들웨어 내의 미들웨어에는 (req, res, next)를 넣어준다.
 });
 
 //카카오
 // 카카오 로그인
-router.get('/kakao', isNotLoggedIn, passport.authenticate('kakao'));
+router.get('/kakao', passport.authenticate('kakao'));
 
 router.get('/kakao/callback', passport.authenticate('kakao', {
-    failureRedirect: '/join',
+  failureRedirect: 'http://localhost:3000',
 }), (req, res) => {
-    res.redirect('/')
+  res.redirect('http://localhost:3000');
 });
 
 // 페이스북 로그인
 router.get('/facebook', isNotLoggedIn, passport.authenticate('facebook', {scope: ['public_profile', 'email']} ));
 
 router.get('/facebook/callback', passport.authenticate('facebook', {
-    failureRedirect: '/join',
+    failureRedirect: 'http://localhost:3000',
 }), (req, res) => {
-    res.redirect('/')
+    res.redirect('http://localhost:3000');
 });
 
 // 네이버 로그인
 router.get('/naver', isNotLoggedIn, passport.authenticate('naver'));
 
 router.get('/naver/callback', passport.authenticate('naver', {
-    failureRedirect: '/join',
+    failureRedirect: 'http://localhost:3000',
 }), (req, res) => {
-    res.redirect('/')
+    res.redirect('http://localhost:3000');
 });
 
 router.put('/hostapply',isLoggedIn, async (req, res, next) => {
-    console.log(req.user);
     try{
         const exUser = await User.update({
             hostAvailability: true,   

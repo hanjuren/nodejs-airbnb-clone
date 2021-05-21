@@ -26,7 +26,10 @@ const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
 
 passportConfig();
 app.set('port', process.env.PORT || 8640);

@@ -57,7 +57,7 @@ const Register = (props) => {
         </SocialLogin>
       </JoinForm>
 
-      <Button type="page" text="로그인" click={change}/>
+      <Button type="page" text="로그인" event={change}/>
     </>
   );
 };

@@ -36,7 +36,7 @@ const AuthInfoLink = styled.div`
 
 const ModalType = (props) => {
   const store = React.useContext(userContext);
-  console.log(store)
+
   const [authModalOpen, setAuthModalOpen] = useState(false);
   
   const [openState, setOpenState] = useState(props.open);
@@ -55,7 +55,6 @@ const ModalType = (props) => {
   }
   const logout = async () => {
     await Logout();
-    window.localStorage.clear();
     store.setLogin(false);
     close();
   }

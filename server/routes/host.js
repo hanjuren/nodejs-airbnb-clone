@@ -7,8 +7,9 @@ const { Host, Image, User, Review, Reservation } = require('../models');
 const router = express.Router();
 
 // 숙소 업로드 페이지 
-router.get('/', isLoggedIn, (req, res) => {
-    res.render('hosting', { title: "호스트" });
+router.get('/', (req, res) => {
+    console.log(req)
+    // res.render('hosting', { title: "호스트" });
 });
 
 // 호스트 신청 페이지
@@ -18,7 +19,6 @@ router.get('/apply', isLoggedIn, (req, res) => {
 
 //게시물 가져오기
 router.get('/city', async (req, res, next) => {
-    
     try {
         let pageNum = req.query.pagenum; // 요청 페이지 넘버
         let offset = 0;

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
 import { RiKakaoTalkFill, RiFacebookCircleFill } from 'react-icons/ri';
+import { URL } from '../../Config';
 
 const Buttoncss = css`
   display: flex;
@@ -24,6 +25,16 @@ const Buttoncss = css`
   }
 `;
 
+const Atag = css`
+  a{
+    display: flex;
+    text-decoration: none;
+    color: black;
+    outline: none;
+    border: none;
+  }
+`;
+
 const ExButton = styled.button`
   background-color: #ff7777;
   ${Buttoncss};
@@ -32,10 +43,12 @@ const ExButton = styled.button`
 const Kakao = styled.button`
   background-color: #F7E600;
   ${Buttoncss};
+  ${Atag};
 `;
 const Facebook = styled.button`
   background-color: #3b5998;
   ${Buttoncss};
+  ${Atag};
 `;
 const Naver = styled.button`
   background-color: #2DB400;
@@ -44,6 +57,7 @@ const Naver = styled.button`
     width: 20px;
     height: 20px;
   }
+  ${Atag};
 `;
 
 const Change = styled.button`
@@ -60,14 +74,16 @@ font-weight: 800;
 
 const style = { color: "white", fontSize: "1.4em" };
 
-const Button = ({type, text, click, event}) => {
+const Button = ({type, text, event}) => {
   
   if (type === 'kakao') {
     return (
       <>
-        <Kakao>
+        <Kakao onClick={event}>
+          <a href={`${URL}auth/kakao`}>
           <RiKakaoTalkFill className="IconButton" style={style}/>
           <p>{text}</p>
+          </a>
         </Kakao>
       </>
     );
@@ -75,8 +91,10 @@ const Button = ({type, text, click, event}) => {
     return (
       <>
         <Facebook>
-          <RiFacebookCircleFill className="IconButton" style={style}/>
-          <p>{text}</p>
+          <a href={`${URL}auth/facebook`}>
+            <RiFacebookCircleFill className="IconButton" style={style}/>
+            <p>{text}</p>
+          </a>
         </Facebook>
       </>
     );
@@ -84,8 +102,10 @@ const Button = ({type, text, click, event}) => {
     return (
       <>
         <Naver>
-          <img src="./naver-icon-style.png" className="IconButton"/>
-          <p>{text}</p>
+          <a href={`${URL}auth/naver`}>
+            <img src="./naver-icon-style.png" className="IconButton"/>
+            <p>{text}</p>
+          </a>
         </Naver>
       </>
     );
@@ -100,7 +120,7 @@ const Button = ({type, text, click, event}) => {
   } else {
     return (
       <>
-        <Change onClick={click}>
+        <Change onClick={event}>
           <p>{text}</p>
         </Change>
       </>

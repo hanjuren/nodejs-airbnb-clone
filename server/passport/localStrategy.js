@@ -7,7 +7,6 @@ const User = require('../models/user');
 module.exports = () => {
     // passport.authenticate('local' ...에서이동해서  밑의 로직이 실행된다.
     passport.use(new LocalStrategy({
-        
         usernameField: 'email',  // req.body.email 필드와 req 값이 일치해야됨
         passwordField: 'password',  // req.body.password 
     }, async (email, password, done) => {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import AuthLogin from '../../../logic/auth/AuthLogin';
+import {AuthLogin} from '../../../logic/auth/AuthLogin';
+import {URL} from '../../../Config';
 import Button from '../../../common/button/Button';
 import Input from '../../../common/input/Input';
 import styled from 'styled-components';
@@ -43,7 +44,6 @@ const Login = (props) => {
   const store = React.useContext(userContext);
   
   const { change, close } = props;
-  const [success, setSuccess] = useState('');
 
   const [emailState, setEmail] = useState('');
   const [passwordState, setPassword] = useState('');
@@ -55,17 +55,16 @@ const Login = (props) => {
     setPassword(e.target.value);
   };
  
-  const resetValue = async (e) => {
+  const login = async (e) => {
     try {
       e.preventDefault();
-      const data = await AuthLogin(emailState, passwordState);
-      if(data) {
-        window.localStorage.setItem('id', data.id);
-        window.localStorage.setItem('email', data.email);
+      const logindata = { email: emailState, password: passwordState};
+      const data = await AuthLogin(logindata);
+      if(data.loginsuccess) {
         store.setLogin(true);
         close();
       } else {
-        console.log("로그인 실패");
+        window.alert(data.message);
         setEmail('');
         setPassword('');
       }
@@ -84,7 +83,7 @@ const Login = (props) => {
       <Loginform>
         <Input type="text" name="email" placeholder="이메일 입력해주세요" value={emailState} event={email}/>
         <Input type="password" name="password" placeholder="비밀번호를 입력해주세요" value={passwordState} event={password}/>
-        <Button type="local" text="로그인하기" event={resetValue}/>
+        <Button type="local" text="로그인하기" event={login}/>
       </Loginform>
 
       </Form>
@@ -97,7 +96,7 @@ const Login = (props) => {
 
     </LoginContainer>
     
-    <Button type="page" text="회원가입" click={change}/>
+    <Button type="page" text="회원가입" event={change}/>
     </>
   );
 };

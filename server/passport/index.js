@@ -18,6 +18,7 @@ module.exports = () => {
     passport.deserializeUser((id, done) => {
         User.findOne({ 
             where: {id},
+            attributes: ['id', 'name', 'nickname', 'phone', 'email'],
             include: {
                 model: Favorite,
                 attributes: ['HostId'],

@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 const Logout = async () => {
-  const logout = await axios.get('http://localhost:8640/logout')
+  const logout = await axios.get('http://localhost:8640/logout', {
+    withCredentials: true,
+  })
 
   if(logout.success) {
     return;
