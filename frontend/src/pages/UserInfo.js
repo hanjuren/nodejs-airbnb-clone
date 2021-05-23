@@ -6,7 +6,8 @@ const UserInfo = () => {
     
     axios.get('http://localhost:8640/userinfo', { withCredentials: true })
       .then((response) => {
-        console.log(response.data)  
+        console.log(response.data);
+        window.alert(response.data.message);  
       })
   }
 

@@ -41,7 +41,7 @@ const ModalType = (props) => {
   
   const [openState, setOpenState] = useState(props.open);
   const [checkType, setCheckType] = useState('');
-  const { open, close } = props;
+  const { close } = props;
 
   const authModal = (checkType) => {
     setCheckType(checkType);

@@ -39,12 +39,12 @@ const NumberInput = styled.input`
 const Input = (props) => {
   const {placeholder, type, name, value, event} = props;
 
-  if(type === "number") {
+  if(type === "tel") {
     return (
       <>
         {name === "firstNum" ? (
-          <NumberInput type={type} name={name} value="010" readOnly/>
-        ) : <NumberInput type={type} name={name} placeholder="- - - -"/>}
+          <NumberInput type={type} name={name} onChange={event}/>
+        ) : <NumberInput type={type} name={name} placeholder="- - - -"  onChange={event}/>}
         
       </>
     );

@@ -24,12 +24,12 @@ function App() {
       }
     }
     user();
-  }, [login]);
+  }, []);
 
   const store = {
     login, setLogin
   };
-  
+
   return (
     <>
       <userContext.Provider value={store}>

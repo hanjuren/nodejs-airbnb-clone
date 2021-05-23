@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {AuthLogin} from '../../../logic/auth/AuthLogin';
-import {URL} from '../../../Config';
 import Button from '../../../common/button/Button';
 import Input from '../../../common/input/Input';
 import styled from 'styled-components';
