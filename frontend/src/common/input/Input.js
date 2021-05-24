@@ -11,52 +11,14 @@ const InputCommons = styled.input`
   font-size: 17px;
 `;
 
-const NumInput = css`
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid lightgray;
-  outline: none;
-  text-align: center;
-`;
-
-const NumberInput = styled.input`
-  width: 100px;
-  margin-right: 20px;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid lightgray;
-  outline: none;
-  text-align: center;
-
-  ::-webkit-outer-spin-button,
-  ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-`;
-
 
 const Input = (props) => {
-  const {placeholder, type, name, value, event} = props;
-
-  if(type === "tel") {
+  const {placeholder, type, name, value, event, inputref} = props;
     return (
       <>
-        {name === "firstNum" ? (
-          <NumberInput type={type} name={name} onChange={event}/>
-        ) : <NumberInput type={type} name={name} placeholder="- - - -"  onChange={event}/>}
-        
+        <InputCommons type={type} name={name} placeholder={placeholder} value={value}  onChange={event} ref={inputref}/>
       </>
     );
-  }
-  else {
-    return (
-      <>
-        <InputCommons type={type} name={name} placeholder={placeholder} value={value}  onChange={event}/>
-      </>
-    );
-  }
-  
 };
 
 export default Input;

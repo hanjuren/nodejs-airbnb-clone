@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import Button from '../../../common/button/Button';
 import Input from '../../../common/input/Input';
 import {SocialLogin} from '../login/Login';
-import {AuthRegister} from '../../../logic/auth/Register';
+import {AuthRegister, emailCheck} from '../../../logic/auth/Register';
+import { userContext } from '../../../App';
 
 
 const JoinForm = styled.form`
@@ -27,12 +28,11 @@ const PhoneDiv = styled.div`
   justify-content: center;
 `;
 
-
-
 const Register = (props) => {
-  
+  const store = React.useContext(userContext);
+  const emailInput = useRef(null);
   const { change } = props;
-
+  // 회원가입 폼 데이터 상태
   const [registerState, setRegisterState] = useState({
     email: "",
     password: "",
@@ -40,9 +40,9 @@ const Register = (props) => {
     nickname: "",
     phone: ""
   });
-  const [inputValue, setInputValue] = useState('');
-  const {email, password, name, nickname, phone} = registerState;
 
+  const {email, password, name, nickname, phone} = registerState;
+  // 전화번호 하이픈 추가하기
   useEffect(() => {
     if (registerState.phone.length === 11) {
       setRegisterState({
@@ -51,7 +51,7 @@ const Register = (props) => {
       });
     }
   }, [registerState]);
-
+  // 인풋 데이터 상태에 추가
   const registerValue = (e) => {
     const {value, name} = e.target;
     setRegisterState({
@@ -59,7 +59,7 @@ const Register = (props) => {
       [name] : value
     });
   };
-
+  //전화번호 상태 추가 및 형식 검사
   const PhoneValue = (e) => {
     const regex = /^[0-9\b -]{0,13}$/;
     
@@ -71,10 +71,35 @@ const Register = (props) => {
       });
     }
   };
-
+  // 회원가입 이벤트
   const register = async (e) => {
-    e.preventDefault();
-    AuthRegister(registerState);
+    try{
+      e.preventDefault();
+      const checkData = await emailCheck(registerState.email);
+      if(checkData)  {
+        const register = await AuthRegister(registerState);
+        if(register.joinsuccess) {
+          window.alert(register.message);
+          change();
+        } else {
+          window.alert(register.message);
+          setRegisterState({
+            email: "", password: "", name: "", nickname: "", phone: ""
+          });
+          emailInput.current.focus();
+        }
+      } else {
+        window.alert("올바르지 않은 이메일 형식입니다.");
+        setRegisterState({
+          ...registerState,
+          email: ""
+        });
+        emailInput.current.focus();
+      }
+    } catch(error) {
+      window.alert(error);
+    }
+    
   };
 
   return (
@@ -82,7 +107,7 @@ const Register = (props) => {
       <JoinForm>
         <h3>에어비앤비에 오신 것을 환영합니다.</h3>
         <JoinContainer>
-            <Input type="text" name="email" placeholder="사용할 이메일을 입력해주세요" value={email} event={registerValue} />
+            <Input type="text" name="email" placeholder="사용할 이메일을 입력해주세요" value={email} event={registerValue} inputref={emailInput}/>
             <Input type="password" name="password" placeholder="사용할 비밀번호를 입력해주세요" value={password} event={registerValue}/>
             <Input type="text" name="name" placeholder="이름을 입력해주세요" value={name} event={registerValue}/>
             <Input type="text" name="nickname" placeholder="닉네임을 입력해주세요" value={nickname} event={registerValue}/>
