@@ -24,7 +24,7 @@ const Cityinfo = (props) => {
   const [info, setText] = useState(`${props.text}`);
   return (
     <>
-    <City id={cityName}>
+    <City  id={cityName}>
       <img src={src} />
       <p>{info}</p>
     </City>

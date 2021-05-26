@@ -51,7 +51,7 @@ sequelize.sync( { force: false })
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/img', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, '../frontend/public/uploads')));
 app.use(express.json());
 app.use(express.urlencoded( { extended: false } ));
 

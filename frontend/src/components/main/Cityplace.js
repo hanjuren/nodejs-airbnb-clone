@@ -2,6 +2,7 @@ import React from 'react';
 import Cityinfo from './Cityinfo';
 import Category from './Category';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const CityPlace = styled.div`
   width: 100%;
@@ -23,6 +24,11 @@ const CityCategory = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr) !important;
   grid-auto-flow: row !important;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
 `;
 
 const CategoryInfo = styled.div`
@@ -133,13 +139,15 @@ const Cityplace = () => {
         <section>도시 여행지 둘러보기</section>
         <CityCategory>
           {cityinfo.map((city, index) => (
+            <Link key={index} to={`/hosts?city=${city.id}`}>
             <Cityinfo
-            key={index}
             id={city.id}
             img={city.img}
             text={city.text}
-          />
-          ))}
+            key={index}
+            />
+            </Link>
+          ))};
         </CityCategory>
       </CityPlace>
       <CategoryInfo>
@@ -152,7 +160,7 @@ const Cityplace = () => {
             img={category.img}
             text={category.text}
           />
-          ))}
+          ))};
         </CategoryBox>
       </CategoryInfo>
     </>

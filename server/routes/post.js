@@ -10,16 +10,16 @@ const { isLoggedIn } = require('./middlewares');
 const router = express.Router();
 
 try {
-    fs.readdirSync('uploads');
+    fs.readdirSync('../frontend/public/uploads');
 } catch (error) {
     console.error('uploads 폴더가 없어 uploads 폴더를 생성 합니다.');
-    fs.mkdirSync('uploads');
+    fs.mkdirSync('../frontend/public/uploads');
 }
 
 const upload = multer({
     storage: multer.diskStorage({
         destination(req, file, cb) {
-            cb(null, 'uploads/');
+            cb(null, '../frontend/public/uploads/');
         },
         filename(req, file, cb) {
             const ext = path.extname(file.originalname);
@@ -48,7 +48,7 @@ router.post('/', isLoggedIn, upload.array('img'), async (req, res, next) => {
         });
         for(i=0; i<req.files.length; i++){
             let newImage = await Image.create({
-                src: "img/" + req.files[i].filename,
+                src: "uploads/" + req.files[i].filename,
                 HostId: newHost.id,
             });
             //console.log(newImage);

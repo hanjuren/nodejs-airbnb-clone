@@ -9,7 +9,7 @@ const router = express.Router();
 // 숙소 업로드 페이지 
 router.get('/', (req, res) => {
     console.log(req)
-    // res.render('hosting', { title: "호스트" });
+    res.render('hosting', { title: "호스트" });
 });
 
 // 호스트 신청 페이지
