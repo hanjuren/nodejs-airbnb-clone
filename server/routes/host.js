@@ -22,9 +22,9 @@ router.get('/city', async (req, res, next) => {
     try {
         let pageNum = req.query.pagenum; // 요청 페이지 넘버
         let offset = 0;
-
+        console.log(pageNum)
         if(pageNum > 1){
-            offset = 12 * (pageNum - 1);
+            offset = 1 * (pageNum - 1);
         }
         let hosts;
         let count;
@@ -123,7 +123,7 @@ router.get('/city', async (req, res, next) => {
                 },
                 order: [['id', 'DESC']],
                 offset: offset,
-                limit: 12,
+                limit: 5,
     
             });
             count = await Host.count({
