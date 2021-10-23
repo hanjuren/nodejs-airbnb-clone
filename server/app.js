@@ -64,13 +64,13 @@ app.use(session({
         httpOnly: true,
         secure: false,
     },
-    store: new MysqlStore({
-        host: 'localhost',
-        port: 3306,
-        user: 'root',
-        password: process.env.SESSION_MYSQL_PASSWORD,
-        database: 'airbnbclone'
-      })
+    // store: new MysqlStore({
+    //     host: 'localhost',
+    //     port: 3306,
+    //     user: 'root',
+    //     password: process.env.SESSION_MYSQL_PASSWORD,
+    //     database: 'airbnbclone'
+    //   })
 }));
 
 app.use(passport.initialize());

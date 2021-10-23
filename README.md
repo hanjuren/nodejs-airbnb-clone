@@ -1,7 +1,45 @@
-# 에어비앤비 클론 코딩 해보기
+# 에어비앤비 클론 코딩
 
+**Notion**. https://www.notion.so/c622c8c322d9415a9c7c097123434c63
 
-API 방식
+### 프로젝트 구성 및 계획
+Node.js 기반 express를 사용하여 백엔드 서버를 구축하였고 Nunjucks 템플릿 엔진을 통해 화면을 구성하였습니다.  
+Node 교과서 [저자: 조현영(제로초)] 서적과 강의를 학습하며 강의를 기반하여 실습을 진행하기 위해 기획하였으며 클론 코딩 과정에서 기억에 남고 어려웠던 부분들에 대해서는  
+[개인 블로그](https://hanjuren.github.io/categories/express/)를 통해 기록해왔습니다.
+
+> 프로젝트에 사용한 기술 스택
+* Node.js (v.14.*)
+* express
+* sequelize
+* mysql2
+* express-session
+* passport
+* passport-local , kakao, facebook, naver
+* multer
+* dotenv
+* morgan
+* nodemon
+
+> 데이터베이스
+* Mysql
+
+### 프로젝트 구조
+* views : Front view
+* public : css
+* uploads : Upload Image
+* routes : express Router
+  * auth : 유저 인증
+  * favorites : 숙소 찜 목록 관리
+  * host : 숙소 관련 라우터
+  * post : 숙소 업로드
+  * review : 리뷰 관련 라우터
+  * reservation : 숙소 예약 관련 라우터
+* models : 데이터베이스 모델 관리
+
+> ERD
+![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/b9663c4f-1780-447c-a981-1b64134fcb76/ERD.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211023%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211023T080230Z&X-Amz-Expires=86400&X-Amz-Signature=bfd7f37168af5a239a28ab66697a5532c023ebb21d1a280521cbc4cb2e6e22d4&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22ERD.png%22)
+
+> REST API
 ## GET
 - [x] "/" => main페이지 로드  
 - [x] "login" => 로그인 페이지 로드
@@ -27,88 +65,3 @@ API 방식
 - [x] "/auth/hostapply" => 호스트 신청 처리
 
 ---
-
-## DATABASE
-
-User테이블  
-* 모델 이름 : User  
-* 테이블 이름 : users
-
-사용자의 정보를 가지는 테이블
-
-| Column | Type | Key | Options | Null | Comment |
-|:---|:---|:---|:---|:---|:---|
-| id | Number | Pk | | true | |
-| email | String | | | true | 사용자 이메일 |
-| password | String | | bcrypt암호화 | true | 사용자 비밀번호 |
-| name | String | | | false | 사용자 이름 |
-| nickname | String | | | true | 사용자 닉네임 |
-|phone|String| | | true | 사용자 전화번호 |
-| provider | String | | defaultValue : 'local' | false | 계정의 종류 |
-| snsId | String | | | true | SNS가입시 SNS 아이디 |
-| hostAvailability | Boolean | | dafaultValue : 'false' | false | 사용자의 호스트 권한 여부 |
-
-* User모델 관계
-  * User모델 1 : N Host모델
-  * User모델 1 : N Reservation모델
-
-
-Host테이블  
-* 모델 이름 : Host
-* 테이블 이름 : hosts
-
-숙소에 대한 정보를 가지는 테이블
-
-| Column | Type | Key | Options | Null | Comment |
-|:---|:---|:---|:---|:---|:---|
-| id | Number | Pk | | false | |
-| title | String | | | false | 숙소 타이틀 |
-| hostaddress | String | | | false | 숙소 주소 전체 |
-| city | String | | | false | 숙소 도시 |
-| person | String | | | false | 숙소 인원 제한 |
-| roominfo_room | String | | | false | 방 갯수 |
-| roominfo_bed | String | | | false | 침대 사이즈 정보 |
-| roominfo_cook | String | | | false | 취사여부 |
-| roominfo_bathroom | String| | | false | 화장실 갯수 |
-| hostinfo | String  | | | false | 숙소 상세 설명 |
-| UserId | | Fk | | false | 작성한 사용자 아이디 | 
-
-* Host모델 관계
-  * Host모델 N : 1 User모델
-  * Host모델 1 : N Image모델
-  * Host모델 1 : N Reservation모델
-
-Reservation테이블  
-* 모델 이름 : Reservation
-* 테이블 이름 : reservation
-
-호스트 예약 정보를 가지는 테이블
-
-| Column | Type | Key | Options | Null | Comment |
-|:---|:---|:---|:---|:---|:---|
-| id | Number | Pk | | false | |
-| checkIn | DateOnly | | | false | 체크인 날짜 |
-| checkout | DateOnly | | | false | 체크아웃 날짜 |
-| reservationUserName | String | | | false | 예약자 이름 |
-| reservationPhone | String | | | false | 예약자 전화번호 |
-| UserId | | Fk | | false | 예약한 사용자 아이디 |
-| HostId | | Fk | | fasle | 예약한 숙소 아이디 |
-
-* Reservation모델 관계
-  * Reservation모델 N : 1 User모델
-  * Reservation모델 N : 1 Host모델
-
-Image테이블  
-* 모델 이름: Image
-* 테이블 이름 : images
-
-숙소의 사진정보를 가지는 테이블
-
-| Column | Type | Key | Options | Null | Comment |
-|:---|:---|:---|:---|:---|:---|
-| id | Number | Pk | | false | |
-| src | String | | | false | 숙소의 이미지주소 |
-| HostId | | Fk | | false | 이미지의 숙소 아이디 |
-
-* Image모델 관계
-  * Image모델 N : 1 Host모델

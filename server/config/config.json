@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "1210",
+    "password": "1210ss",
     "database": "airbnbclone",
     "host": "127.0.0.1",
     "dialect": "mysql",

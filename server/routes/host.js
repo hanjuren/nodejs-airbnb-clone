@@ -178,8 +178,8 @@ router.get('/:hostid', async (req, res, next) => {
                 },  
             ],
         });
-        //res.render('hostinfo', {host});
-        res.json({data: host});
+        res.render('hostinfo', {host});
+        //res.json({data: host});
     }catch (error) {
         console.error(error);
         next(error);

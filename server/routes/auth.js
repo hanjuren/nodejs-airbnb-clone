@@ -53,7 +53,7 @@ router.post('/login', async(req, res, next) => {
                 return next(loginError);
             }
             
-            return res.json({loginsuccess: true});
+            return res.json({loginsuccess: true, message: '로그인 성공'});
         });
     })(req, res, next); // 미들웨어 내의 미들웨어에는 (req, res, next)를 넣어준다.
 });
